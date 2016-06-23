@@ -2,9 +2,6 @@ package game.bufferstrategy;
 
 import java.awt.*;
 
-/**
- * Created by saeedehspg on 6/21/2016 AD.
- */
 public class Zombie extends Drawable {
     @Override
     int getStateToVisible() {
