@@ -2,27 +2,37 @@ package game.bufferstrategy;
 
 import game.bufferstrategy.Drawable;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
- * Created by Applestore on 6/22/16.
+ * Created by saeedehspg on 6/22/16.
  */
 public class Grass extends Drawable {
-    public Grass(int x, int y , int width) {
-        super(x,y,"gr.jpg",0, 120);
+    private int cropWidth = 1;
+    private BufferedImage fullImage;
 
+    public Grass(int x, int y) {
+        super(x,y,"gr.jpg",0, 120);
+        fullImage = img;
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d , GameState gameState) {
         try {
-            super.draw(g2d);
+            super.draw(g2d , gameState);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(width < 700 ) {
-             width += 5;
-         }
+        if (cropWidth < 700 ) {
+            img = fullImage.getSubimage(0, 0, cropWidth, height);
+            cropWidth += 5;
+            width += 5;
+        }
+        else if (gameState.states == 1) gameState.states = 2;
+
+
     }
 }
 

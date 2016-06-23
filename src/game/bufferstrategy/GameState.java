@@ -21,6 +21,7 @@ public class GameState {
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 	public int money = 0;
+	public int states = 1;
 	ArrayList<Drawable> drawas = new ArrayList<Drawable>();
 
 	public GameState() {
@@ -97,9 +98,8 @@ public class GameState {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-
 			java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
-			Image image = toolkit.getImage("Repeater_HD_HD.png");
+			Image image = toolkit.getImage("images/Repeater_HD_HD.png");
 			Cursor a = toolkit.createCustomCursor(image, new Point(0,0), "");
 			gamef.setCursor (a);
 

@@ -6,15 +6,19 @@ import java.awt.*;
  * Created by saeedehspg on 6/21/2016 AD.
  */
 public class Zombie extends Drawable {
+    @Override
+    int getStateToVisible() {
+        return 2;
+    }
     public Zombie(int x, int y) {
-        super(x,y,"ZombieHD.png",150, 180);
+        super(x,y,"ZombieHD.png",70, 100);
 
     }
 
     @Override
-    public void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d , GameState gameState) {
         try {
-            super.draw(g2d);
+            super.draw(g2d,gameState);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

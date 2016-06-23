@@ -2,8 +2,16 @@
 package game.bufferstrategy;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 
 /**
@@ -21,16 +29,20 @@ public class GameFrame extends JFrame {
 	public static final int GAME_HEIGHT = 287 * 2;
 	public static final int GAME_WIDTH = 530 * 2;
 	ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+	ArrayList<Selectable> selectables = new ArrayList<Selectable>();
+	MouseHandler mouseHandler = new MouseHandler();
 	
 	private BufferStrategy bufferStrategy;
 	
 	public GameFrame(String title) {
 		super(title);
 		setResizable(false);
+//		setUndecorated(true);
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		//
 		// Initialize the JFrame ...
 		//
+
 	}
 	
 	/**
@@ -77,17 +89,18 @@ public class GameFrame extends JFrame {
 
 
 
-		Image bg = Toolkit.getDefaultToolkit().getImage("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure\\out\\production\\GameStructure\\game\\bufferstrategy\\images\\bggarden.jpg");
+		Image bg = Main.loadImage("bggarden.jpg");
 		g2d.drawImage(bg, 0, 0, 678 * 2, GAME_HEIGHT, null);
 
-		Image money = Toolkit.getDefaultToolkit().getImage("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure\\out\\production\\GameStructure\\game\\bufferstrategy\\images\\money.jpg");
+		Image money = Main.loadImage("money.jpg");
 		g2d.drawImage(money, 100, 20, 164,52, null);
 
 
 
 		for (Drawable drawable: drawables){
 			try {
-				drawable.draw(g2d);
+				if (drawable.getStateToVisible() <= state.states)
+					drawable.draw(g2d ,state);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -106,9 +119,76 @@ public class GameFrame extends JFrame {
 		drawables.add(new LawnMover(270, 350));
 		drawables.add(new LawnMover(270, 450));
 		drawables.add(new LawnMover(270, 50));
-		drawables.add(new Zombie(590,50));
 		drawables.add(new PlantsPicker(10,40));
-		drawables.add(new Grass(390,200 , 0));
+		drawables.add(new Grass(390,200));
+		drawables.add(new RollingGrass(390,200));
+		drawables.add(new Zombie(880,200));
+
+		for (int j=0; j<5; j++)
+			for (int i=0; i<9; i++)
+				selectables.add(new Selectable(395+(i*70),85+(j*70)));
+	}
+
+	Drawable getClickedItem(int x, int y) {
+		for (Drawable drawable : drawables) {
+			if (
+					(x >= drawable.x && x <= drawable.x + drawable.width) &&
+					(y >= drawable.y && y <= drawable.y + drawable.height)
+			) {
+				return drawable;
+			}
+		}
+		return null;
+	}
+
+	Selectable getClickedSelectable(int x, int y) {
+		for (Selectable selectable : selectables) {
+			if (
+					(x >= selectable.x && x <= selectable.x + 70) &&
+							(y >= selectable.y && y <= selectable.y + 70)
+					) {
+				return selectable;
+			}
+		}
+		return null;
+	}
+
+	class MouseHandler implements MouseListener, MouseMotionListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			Drawable clickedItem = getClickedItem(e.getX(), e.getY());
+			Selectable clickedSelectable = getClickedSelectable(e.getX(), e.getY());
+			Image image = Main.loadImage("Repeater_HD_HD.png");
+			Cursor a = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), "");
+			setCursor(a);
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+		}
+
 	}
 	
 }

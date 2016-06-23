@@ -1,33 +1,32 @@
 package game.bufferstrategy;
 
 import java.awt.*;
-
-
+import java.awt.image.BufferedImage;
 
 /**
  * Created by saeedehspg on 6/21/2016 AD.
  */
-
-/*hello
- what the hell*/
-
-
 public class Drawable {
 
-    Image img;
+    BufferedImage img;
     int x;
     int y;
     int width;
     int height;
+
+    int getStateToVisible() {
+        return 1;
+    }
+
     public Drawable(int x, int y , String file, int width, int height){
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
-        img = Toolkit.getDefaultToolkit().getImage("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure\\out\\production\\GameStructure\\game\\bufferstrategy\\images\\"+file);
+        img = Main.loadImage(file);
 
     }
-    public void draw(Graphics2D g2d) throws InterruptedException {
+    public void draw(Graphics2D g2d , GameState state) throws InterruptedException {
         g2d.drawImage(img, x, y, width,height, null);
     }
 }

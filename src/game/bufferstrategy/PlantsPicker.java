@@ -12,5 +12,11 @@ public class PlantsPicker extends Drawable {
 
     }
 
+    void onclicked(){
+//        Image image = Main.loadImage("Repeater_HD_HD.png");
+//        Cursor a = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), "");
+//        setCursor(a);
+    }
+
 
 }

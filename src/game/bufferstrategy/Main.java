@@ -2,7 +2,14 @@
 package game.bufferstrategy;
 
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  * Program start.
@@ -17,14 +24,14 @@ public class Main {
 		
 		// Show the game menu ...
 		
-		// After the palyer clicks 'PLAY' ...
+		// After the player clicks 'PLAY' ...
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				GameFrame frame = new GameFrame("Game Title");
 				frame.init();
 				frame.setLocationRelativeTo(null); // put frame at center of screen
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setVisible(true);
 				frame.initBufferStrategy();
 				// Create and execute the game-loop
@@ -35,4 +42,15 @@ public class Main {
 			}
 		});
     }
+
+	public static BufferedImage loadImage(String filename) {
+		try {
+			URL imageURL = ClassLoader.getSystemResource("images/" + filename);
+			if (imageURL != null)
+				return ImageIO.read(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+	}
 }
