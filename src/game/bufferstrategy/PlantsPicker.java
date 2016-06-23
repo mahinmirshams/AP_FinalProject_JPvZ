@@ -6,16 +6,25 @@ import java.awt.*;
  * Created by saeedehspg on 6/21/2016 AD.
  */
 public class PlantsPicker extends Drawable {
-    public PlantsPicker(int x, int y) {
-        super(x,y,"IMG_1395-04-01 17:05:47.jpg", 75, 50);
-
+    String cursorName;
+    public PlantsPicker(int x, int y, String imageName, String cursorName) {
+        super(x,y,imageName, 75, 50);
+        this.cursorName = cursorName;
 
     }
 
-    void onclicked(){
-//        Image image = Main.loadImage("Repeater_HD_HD.png");
-//        Cursor a = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), "");
-//        setCursor(a);
+    int getValue(){
+        return 0;
+    }
+
+    @Override
+    void onclicked(GameState gameState){
+        if(gameState.money >= getValue()){
+            Image image = Main.loadImage(cursorName);
+            Cursor a = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), "");
+            gameState.cursor = a;
+            gameState.selectedItemValue = getValue();
+        }
     }
 
 

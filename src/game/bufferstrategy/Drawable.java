@@ -29,4 +29,11 @@ public class Drawable {
     public void draw(Graphics2D g2d , GameState state) throws InterruptedException {
         g2d.drawImage(img, x, y, width,height, null);
     }
+    void onclicked(GameState gameState) {
+    }
+
+    public void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

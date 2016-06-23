@@ -2,6 +2,9 @@ package game.bufferstrategy;
 
 import java.awt.*;
 
+/**
+ * Created by saeedehspg on 6/21/2016 AD.
+ */
 public class Zombie extends Drawable {
     @Override
     int getStateToVisible() {
@@ -15,10 +18,12 @@ public class Zombie extends Drawable {
     @Override
     public void draw(Graphics2D g2d , GameState gameState) {
         try {
-            super.draw(g2d,gameState);
+            super.draw(g2d, gameState);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        x-=1;
+        if (x > 393)
+            x -= 1;
+        else x=393;
     }
 }

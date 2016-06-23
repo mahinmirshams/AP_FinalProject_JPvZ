@@ -3,15 +3,11 @@ package game.bufferstrategy;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
+import java.util.Date;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -30,7 +26,6 @@ public class GameFrame extends JFrame {
 	public static final int GAME_WIDTH = 530 * 2;
 	ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 	ArrayList<Selectable> selectables = new ArrayList<Selectable>();
-	MouseHandler mouseHandler = new MouseHandler();
 	
 	private BufferStrategy bufferStrategy;
 	
@@ -85,8 +80,14 @@ public class GameFrame extends JFrame {
 		// Draw all game elements according 
 		//  to the game 'state' using 'g2d' ...
 		//
-		g2d.setFont(getFont().deriveFont(20.0f));
+		for (Drawable drawable: state.itemsToDelete){
+			drawables.remove(drawable);
+		}
+		state.itemsToDelete.clear();
 
+		g2d.setFont(getFont().deriveFont(20.0f));
+		g2d.setPaint(Color.DARK_GRAY);
+		setCursor(state.cursor);
 
 
 		Image bg = Main.loadImage("bggarden.jpg");
@@ -106,27 +107,43 @@ public class GameFrame extends JFrame {
 			}
 		}
 
-		g2d.drawString(String.valueOf(state.money), 200,20);
+		for (Selectable selectable: selectables){
+			try {
+				if (!selectable.isEmpty() && selectable.currentDrawable.getStateToVisible() <= state.states)
+					selectable.draw(g2d ,state);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		g2d.drawString(String.valueOf(state.money), 179,48);
 
 
 
 	}
 
 
-	public void init(){
+	public void init() {
 		drawables.add(new LawnMover(270, 150));
 		drawables.add(new LawnMover(270, 250));
 		drawables.add(new LawnMover(270, 350));
 		drawables.add(new LawnMover(270, 450));
 		drawables.add(new LawnMover(270, 50));
-		drawables.add(new PlantsPicker(10,40));
-		drawables.add(new Grass(390,200));
-		drawables.add(new RollingGrass(390,200));
-		drawables.add(new Zombie(880,200));
+		drawables.add(new PeaShooterPicker(10, 40));
+		drawables.add(new SunFlowerPicker(10, 80));
+		drawables.add(new Grass(390, 200));
+		drawables.add(new RollingGrass(390, 200));
+		drawables.add(new Zombie(880, 200));
+		drawables.add(new Sun(500, -3));
+		drawables.add(new Sun(500, -30));
 
-		for (int j=0; j<5; j++)
-			for (int i=0; i<9; i++)
-				selectables.add(new Selectable(395+(i*70),85+(j*70)));
+
+
+
+
+		for (int j = 0; j < 5; j++)
+			for (int i = 0; i < 9; i++)
+				selectables.add(new Selectable(395 + (i * 70), 85 + (j * 70)));
 	}
 
 	Drawable getClickedItem(int x, int y) {
@@ -153,42 +170,16 @@ public class GameFrame extends JFrame {
 		return null;
 	}
 
-	class MouseHandler implements MouseListener, MouseMotionListener {
+	void onClick(MouseEvent e, GameState gameState) {
+		Drawable clickedItem = getClickedItem(e.getX(), e.getY());
+		Selectable clickedSelectable = getClickedSelectable(e.getX(), e.getY());
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			Drawable clickedItem = getClickedItem(e.getX(), e.getY());
-			Selectable clickedSelectable = getClickedSelectable(e.getX(), e.getY());
-			Image image = Main.loadImage("Repeater_HD_HD.png");
-			Cursor a = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), "");
-			setCursor(a);
+		if (clickedSelectable != null && gameState.selectedItem != null) {
+			if (clickedSelectable.isEmpty())
+				clickedSelectable.plant(gameState);
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-		}
-
+		if (clickedItem != null)
+			clickedItem.onclicked(gameState);
 	}
 	
 }

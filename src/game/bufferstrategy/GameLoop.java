@@ -1,6 +1,9 @@
 /*** In The Name of Allah ***/
 package game.bufferstrategy;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -39,7 +42,32 @@ public class GameLoop implements Runnable {
 		canvas.addKeyListener(state.getKeyListener());
 		canvas.addMouseListener(state.getMouseListener());
 		canvas.addMouseMotionListener(state.getMouseMotionListener());
-		canvas.addMouseListener(canvas.mouseHandler);
+		canvas.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				canvas.onClick(e, state);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+
+			}
+		});
 	}
 
 	@Override

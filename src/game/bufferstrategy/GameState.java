@@ -22,7 +22,11 @@ public class GameState {
 	private MouseHandler mouseHandler;
 	public int money = 0;
 	public int states = 1;
+	Cursor cursor = null;
+	Drawable selectedItem = null;
 	ArrayList<Drawable> drawas = new ArrayList<Drawable>();
+	ArrayList<Drawable> itemsToDelete = new ArrayList<Drawable>();
+	int selectedItemValue = 0;
 
 	public GameState() {
 		//
@@ -42,7 +46,7 @@ public class GameState {
 		//
 	}
 
-	GameFrame gamef =  new GameFrame("ds");
+
 
 
 	public KeyListener getKeyListener() {
@@ -98,10 +102,6 @@ public class GameState {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
-			Image image = toolkit.getImage("images/Repeater_HD_HD.png");
-			Cursor a = toolkit.createCustomCursor(image, new Point(0,0), "");
-			gamef.setCursor (a);
 
 		}
 
