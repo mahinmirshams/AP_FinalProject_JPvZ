@@ -13,15 +13,15 @@ public class Grass extends Drawable {
     private int cropWidth = 1;
     private BufferedImage fullImage;
 
-    public Grass(int x, int y) {
-        super(x,y,"gr.jpg",0, 120);
+    public Grass(int x, int y,GameState state) {
+        super(x,y,"gr.jpg",0, 120 , state );
         fullImage = img;
     }
 
     @Override
-    public void draw(Graphics2D g2d , GameState gameState) {
+    public void draw(Graphics2D g2d) {
         try {
-            super.draw(g2d , gameState);
+            super.draw(g2d);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

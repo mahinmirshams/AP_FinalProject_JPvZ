@@ -8,8 +8,8 @@ import java.awt.*;
  * Created by saeedehspg on 6/22/16.
  */
 public class Plants extends Drawable {
-    public Plants(int x, int y) {
-        super(x,y,"Repeater_HD_HD.png", 75, 50);
+    public Plants(int x, int y, GameState state) {
+        super(x,y,"Repeater_HD_HD.png", 75, 50,state);
 
 
     }

@@ -29,7 +29,6 @@ public class Main {
 			@Override
 			public void run() {
 				GameFrame frame = new GameFrame("Game Title");
-				frame.init();
 				frame.setLocationRelativeTo(null); // put frame at center of screen
 				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setVisible(true);
@@ -41,6 +40,9 @@ public class Main {
 				// and the game starts ...
 			}
 		});
+
+	//	Sound sound = new Sound();
+	//	sound.run();
     }
 
 	public static BufferedImage loadImage(String filename) {

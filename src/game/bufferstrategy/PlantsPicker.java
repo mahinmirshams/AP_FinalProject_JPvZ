@@ -7,8 +7,8 @@ import java.awt.*;
  */
 public class PlantsPicker extends Drawable {
     String cursorName;
-    public PlantsPicker(int x, int y, String imageName, String cursorName) {
-        super(x,y,imageName, 75, 50);
+    public PlantsPicker(int x, int y, String imageName, String cursorName, GameState state) {
+        super(x,y,imageName, 75, 50, state);
         this.cursorName = cursorName;
 
     }
