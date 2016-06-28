@@ -23,6 +23,7 @@ class GameFrame extends JFrame {
     private static final int GAME_HEIGHT = 287 * 2;
     private static final int GAME_WIDTH = 530 * 2;
 
+
     private BufferStrategy bufferStrategy;
 
     GameFrame(String title) {
@@ -81,7 +82,7 @@ class GameFrame extends JFrame {
         g2d.drawImage(bg, 0, 0, 678 * 2, GAME_HEIGHT, null);
 
         Image money = Main.loadImage("plantPanel.png");
-        g2d.drawImage(money, 0, 0, 500, 150, null);
+        g2d.drawImage(money, -75, 0, 460, 180, null);
 
         ArrayList<Drawable> drawables = new ArrayList<Drawable>(state.drawables);
         for (Drawable drawable : drawables) {
@@ -93,23 +94,15 @@ class GameFrame extends JFrame {
             }
         }
 
-        //   g2d.setPaint(Color.pink);
         for (Selectable selectable : state.selectables) {
             try {
                 if (!selectable.isEmpty() && selectable.currentPlant.getStateToVisible() <= state.states)
                     selectable.draw(g2d, state);
-                // g2d.drawRect(selectable.x, selectable.y, 70, 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        g2d.drawString(String.valueOf(state.money), 100, 100);
-
-        if (state.gameOver) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
-            g2d.drawString("باختی", 330, 290);
-        }
+        g2d.drawString(String.valueOf(state.money), 30, 120);
     }
 }

@@ -5,11 +5,11 @@ import java.awt.*;
 /**
  * Created by saeedehspg on 6/21/2016 AD.
  */
-abstract class PlantsPicker extends Drawable {
+class PlantsPicker extends Drawable {
     private String cursorName;
 
     PlantsPicker(int x, int y, String imageName, String cursorName, GameState state) {
-        super(x, y, imageName, 75, 50, state);
+        super(x, y, imageName, 50, 60, state);
         this.cursorName = cursorName;
     }
 
@@ -26,4 +26,6 @@ abstract class PlantsPicker extends Drawable {
             gameState.selectedItemValue = getValue();
         }
     }
+
+
 }
