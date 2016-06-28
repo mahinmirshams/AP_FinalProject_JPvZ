@@ -5,30 +5,25 @@ import java.awt.*;
 /**
  * Created by saeedehspg on 6/21/2016 AD.
  */
-public class Zombie extends GameObject{
-
+public class Zombie extends Drawable {
     @Override
-
     int getStateToVisible() {
         return 2;
     }
+    public Zombie(int x, int y) {
+        super(x,y,"ZombieHD.png",70, 100);
 
-    public Zombie(int x, int y,GameState state) {
-        super(x, y, "ZombieHD.png", 70, 100,state, 5,100);
     }
 
     @Override
-    void update() {
-        if (gameState.states == 2) {
-            super.update();
-            if (x <= 300) {
-                for (Drawable drawable : gameState.drawables) {
-                    if (drawable instanceof LawnMover && ((LawnMover) drawable).y <= 200) {
-                        ((LawnMover) drawable).changeSpeed(-2);
-                    }
-                }
-            }
+    public void draw(Graphics2D g2d , GameState gameState) {
+        try {
+            super.draw(g2d, gameState);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
+        if (x > 393)
+            x -= 1;
+        else x=393;
     }
 }

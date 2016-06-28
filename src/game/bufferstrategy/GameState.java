@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.awt.Cursor;
-import java.util.Iterator;
 
 /**
  * This class holds the state of the game and all of its elements.
@@ -25,9 +24,8 @@ public class GameState {
 	public int states = 1;
 	Cursor cursor = null;
 	Drawable selectedItem = null;
-	ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-	ArrayList<Selectable> selectables = new ArrayList<Selectable>();
-	ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+	ArrayList<Drawable> drawas = new ArrayList<Drawable>();
+	ArrayList<Drawable> itemsToDelete = new ArrayList<Drawable>();
 	int selectedItemValue = 0;
 
 	public GameState() {
@@ -42,21 +40,11 @@ public class GameState {
 	 * The method which updates the game state.
 	 */
 	public void update() {
-		Iterator<Drawable> iterator = drawables.iterator();
-		while (iterator.hasNext()) {
-			Drawable drawable = iterator.next();
-			if (drawable instanceof GameObject) {
-				GameObject gameObject = (GameObject) drawable;
-				gameObject.update();
-				if (gameObject.isDeletable()) {
-					gameObject.deleteObject();
-					iterator.remove();
-				}
-			}
-		}
+		//
+		// Update the state of all game elements 
+		//  based on user input and elapsed time ...
+		//
 	}
-
-
 
 
 

@@ -3,7 +3,6 @@ package game.bufferstrategy;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.*;
 
 /**
  * A very simple structure for the main game loop.
@@ -46,19 +45,7 @@ public class GameLoop implements Runnable {
 		canvas.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Drawable clickedItem = getClickedItem(e.getX(), e.getY());
-				Selectable clickedSelectable = getClickedSelectable(e.getX(), e.getY());
-
-				if (clickedSelectable != null && state.selectedItem != null) {
-					if (clickedSelectable.isEmpty())
-						clickedSelectable.plant(state);
-				}
-				if (clickedItem != null) {
-					clickedItem.onclicked(state);
-					if (clickedItem instanceof Sun) state.drawables.remove(clickedItem);
-				}
-
-
+				canvas.onClick(e, state);
 			}
 
 			@Override
@@ -81,88 +68,7 @@ public class GameLoop implements Runnable {
 
 			}
 		});
-
-
-		state.drawables.add(new LawnMover(270, 150,state));
-		state.drawables.add(new PeaShooterPicker(10, 40,state));
-
-		state.drawables.add(new SunFlowerPicker(10, 80,state));
-		state.drawables.add(new IcedPeaShooterPicker(10, 130,state));
-		state.drawables.add(new Grass(390, 200 , state));
-		state.drawables.add(new RollingGrass(390, 200,state));
-
-		Random rand = new Random();
-		int value = rand.nextInt(4000);
-		TimerTask Task = new TimerTask() {
-			@Override
-			public void run() {
-
-				Zombie z = new Zombie(880,200,state);
-				state.drawables.add(z);
-				state.zombies.add(z);
-
-			}
-
-		};
-		Date day = new Date();
-		Timer timer = new Timer();
-		timer.schedule(Task ,day.getSeconds(),4000);
-
-
-
-
-		TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-
-				Random rand = new Random();
-				int value = rand.nextInt(state.selectables.size());
-
-				state.drawables.add(new Sun(state ,state.selectables.get(value)));
-			}
-
-		};
-		Date date = new Date();
-		timer.schedule(timerTask ,date.getSeconds() ,4000);
-		System.out.print(date.getTime());
-
-
-		for (int j = 0; j < 5; j++)
-			for (int i = 0; i < 9; i++)
-				state.selectables.add(new Selectable(395 + (i * 70), 85 + (j * 70),state));
-		state.drawables.add(new LawnMover(270, 200,state));
-
 	}
-
-	Drawable getClickedItem(int x, int y) {
-		for (int i=state.drawables.size()-1; i>0 ; i--) {
-			Drawable drawable = state.drawables.get(i);
-			if (
-					(x >= drawable.x && x <= drawable.x + drawable.width) &&
-							(y >= drawable.y && y <= drawable.y + drawable.height)
-					) {
-				return drawable;
-			}
-		}
-		return null;
-	}
-
-	Selectable getClickedSelectable(int x, int y) {
-		for (Selectable selectable : state.selectables) {
-			if (
-					(x >= selectable.x && x <= selectable.x + 70) &&
-							(y >= selectable.y && y <= selectable.y + 70)
-					) {
-				return selectable;
-			}
-		}
-		return null;
-	}
-
-
-
-
-	//Sound sound =  new Sound();
 
 	@Override
 	public void run() {
@@ -173,8 +79,7 @@ public class GameLoop implements Runnable {
 				//
 				state.update();
 				canvas.render(state);
-
-
+				//
 				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
 				if (delay > 0)
 					Thread.sleep(delay);
