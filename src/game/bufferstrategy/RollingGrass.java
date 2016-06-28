@@ -5,10 +5,16 @@ import java.awt.*;
 /**
  * Created by saeedehspg on 6/22/2016 AD.
  */
-public class RollingGrass extends Drawable {
-    public RollingGrass(int x, int y, GameState state) {
-        super(x,y,"roll.jpg",35, 120, state);
+class RollingGrass extends Drawable {
+    enum RollingGrassState {
+        Initial,
+        Rolling
+    }
 
+    RollingGrassState state = RollingGrassState.Initial;
+
+    RollingGrass(int x, int y, GameState state) {
+        super(x, y, "roll.jpg", 35, 120, state);
     }
 
     @Override
@@ -18,8 +24,24 @@ public class RollingGrass extends Drawable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        x+=5;
 
+        if (state == RollingGrassState.Rolling)
+            x += 6;
+
+        for (Selectable selectable : gameState.selectables) {
+            if (
+                    (
+                            (y > selectable.y && y <= selectable.y + 100) ||
+                            (y + height >= selectable.y && (y + height <= 100 + selectable.y))
+                    )
+                    && this.x >= selectable.x
+            ) {
+                selectable.setPlantable();
+            }
+        }
+
+        if (x > 1100)
+            selfDestruction();
     }
 }
 

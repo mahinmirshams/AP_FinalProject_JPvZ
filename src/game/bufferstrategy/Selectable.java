@@ -5,30 +5,31 @@ import java.awt.*;
 /**
  * Created by saeedehspg on 6/22/2016 AD.
  */
-public class Selectable {
+class Selectable {
     int x;
     int y;
+    private boolean plantable = false;
 
-    Drawable currentDrawable = null;
+    Plant currentPlant = null;
     GameState gameState;
 
-    public Selectable(int x, int y, GameState gameState) {
-        this.x = x;
+    Selectable(int x, int y, GameState gameState) {
         this.gameState = gameState;
+        this.x = x;
         this.y = y;
     }
 
     boolean isEmpty() {
-        return currentDrawable == null;
+        return currentPlant == null;
     }
 
     boolean plant(GameState gameState) {
-        if (!isEmpty())
+        if (!plantable || !isEmpty())
             return false;
         if (gameState.states >= gameState.selectedItem.getStateToVisible()) {
-            currentDrawable = gameState.selectedItem;
-            currentDrawable.setLocation(x, y);
-            ((GameObject) currentDrawable).planted();
+            currentPlant = gameState.selectedItem;
+            currentPlant.setLocation(x, y);
+            currentPlant.planted();
             gameState.selectedItem = null;
             gameState.cursor = null;
             gameState.money -= gameState.selectedItemValue;
@@ -38,7 +39,15 @@ public class Selectable {
         return false;
     }
 
-    public void draw(Graphics2D g2d, GameState state) throws InterruptedException {
-        currentDrawable.draw(g2d);
+    void draw(Graphics2D g2d, GameState state) throws InterruptedException {
+        currentPlant.draw(g2d);
+    }
+
+    void dig() {
+        if (!isEmpty()) currentPlant = null;
+    }
+
+    void setPlantable() {
+        plantable = true;
     }
 }

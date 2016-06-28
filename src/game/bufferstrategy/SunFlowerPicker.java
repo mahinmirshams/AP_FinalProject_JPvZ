@@ -3,23 +3,22 @@ package game.bufferstrategy;
 /**
  * Created by saeedehspg on 6/23/2016 AD.
  */
-public class SunFlowerPicker extends PlantsPicker {
+class SunFlowerPicker extends PlantsPicker {
 
-    public SunFlowerPicker(int x, int y, GameState state) {
-        super(x, y, "sunflowerpicker.jpg", "sunflower.gif",state);
+    SunFlowerPicker(int x, int y, GameState state) {
+        super(x, y, "sunflowerpicker.jpg", "sunflower.gif", state);
     }
 
     @Override
     int getValue() {
-        return 50;
+        return 0;
     }
 
     @Override
-    void onclicked(GameState gameState) {
-        super.onclicked(gameState);
+    void onClick(GameState gameState) {
+        super.onClick(gameState);
         if (gameState.money >= getValue())
-            gameState.selectedItem = new SunFlower(0, 0,gameState);
-
+            gameState.selectedItem = new SunFlower(0, 0, gameState);
     }
 }
 

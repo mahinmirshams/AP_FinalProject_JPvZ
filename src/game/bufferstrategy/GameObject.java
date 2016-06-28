@@ -1,56 +1,90 @@
 package game.bufferstrategy;
 
+import java.util.Iterator;
+
 /**
  * Created by saeedehspg on 6/25/2016 AD.
  */
-public class GameObject extends Drawable {
+abstract class GameObject extends Drawable {
 
     int speed;
     int life;
 
-    public GameObject(int x, int y , String file, int width, int height, GameState gameState , int speed, int life){
-        super(x,y,file,width,height,gameState);
-        this.speed=speed;
-        this.life=life;
+    GameObject(int x, int y, String file, int width, int height, GameState gameState, int speed, int life) {
+        super(x, y, file, width, height, gameState);
+        this.speed = speed;
+        this.life = life;
     }
 
-    void move (){
-        x-=speed;
-    }
-     void changeSpeed(int speed){
-         this.speed=speed;
-     }
-    void hurt(int strength){
-        life -=strength;
-        if (life<0)
-            life=0;
-    }
-    boolean isDeletable(){
-        return life==0;
+    void move() {
+        x -= speed;
     }
 
-    void deleteObject(){
-
+    void changeSpeed(int speed) {
+        this.speed = speed;
     }
 
-    void update(){
-        if (gameState.states>=2)
-        move();
+    void hurt(int strength) {
+        life -= strength;
+        if (life < 0)
+            life = 0;
     }
 
-    void planted(){
+    boolean isDeletable() {
+        return life == 0;
+    }
+
+    void deleteObject() {
 
     }
 
-    GameObject getCollidedObject(){
-        for (Drawable drawable : gameState.drawables){
-            if(drawable instanceof GameObject){
-               if(x+width>=drawable.x && ((y>drawable.y && y<=drawable.y+drawable.height) || (y+height<=drawable.y))){
-//                   return
-               }
+    void update() {
+        if (gameState.states > 1)
+            move();
+    }
+
+    void planted() {
+
+    }
+
+    GameObject getCollidedZombie() {
+        for (Iterator<Drawable> iterator = gameState.drawables.iterator(); iterator.hasNext(); ) {
+            Drawable drawable = iterator.next();
+            if (drawable instanceof GameObject) {
+                if (
+                        (
+                                (x < drawable.x + drawable.width && x >= drawable.x) ||
+                                        (x + width >= drawable.x && x + width <= drawable.x + drawable.width)
+                        ) &&
+                                (
+                                        (y > drawable.y && y <= drawable.y + drawable.height) ||
+                                                (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
+                                )
+                        ) {
+                    return (GameObject) drawable;
+                }
             }
         }
         return null;
     }
 
+    GameObject getCollidedPlant() {
+        for (Selectable selectable : gameState.selectables) {
+
+            if (!selectable.isEmpty() &&
+                    (
+                            (x < selectable.x + selectable.currentPlant.width && x >= selectable.currentPlant.x) ||
+                            (x + width >= selectable.currentPlant.x && x + width <= selectable.currentPlant.x + selectable.currentPlant.width)
+                    ) &&
+                    (
+                            (y > selectable.currentPlant.y && y <= selectable.currentPlant.y + selectable.currentPlant.height) ||
+                            (y + height >= selectable.currentPlant.y && (y + height <= selectable.currentPlant.height + selectable.currentPlant.y))
+                    )
+            ) {
+                return selectable.currentPlant;
+            }
+        }
+
+        return null;
+    }
 }
