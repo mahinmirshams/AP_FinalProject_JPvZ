@@ -6,7 +6,7 @@ package game.bufferstrategy;
 class PeaShooterPicker extends PlantsPicker {
 
     PeaShooterPicker(int x, int y, GameState state) {
-        super(x, y, "IMG_1395-04-01 17:05:47.jpg", "Repeater_HD_HD.png", state);
+        super(x, y, "peashooterpicker.jpg", "Repeater_HD_HD.png", state);
     }
 
     @Override
