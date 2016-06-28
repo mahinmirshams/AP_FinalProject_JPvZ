@@ -86,26 +86,26 @@ class GameLoop implements Runnable {
         //state.drawables.add(new LawnMover(270, 150,state));
 
         if(state.level<=2) {
-            state.drawables.add(new PeaShooterPicker(10, 40, state));
-            state.drawables.add(new SunFlowerPicker(10, 80, state));
+            state.drawables.add(new PeaShooterPicker(65, 57, state));
+            state.drawables.add(new SunFlowerPicker(130, 57, state));
         }
         if(state.level==3) {
-            state.drawables.add(new PeaShooterPicker(10, 40, state));
-            state.drawables.add(new SunFlowerPicker(10, 80, state));
-            state.drawables.add(new IcedPeaShooterPicker(10, 130, state));
+            state.drawables.add(new PeaShooterPicker(65, 57, state));
+            state.drawables.add(new SunFlowerPicker(130, 57, state));
+            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
         }
         if(state.level==4) {
-            state.drawables.add(new PeaShooterPicker(10, 40, state));
-            state.drawables.add(new SunFlowerPicker(10, 80, state));
-            state.drawables.add(new IcedPeaShooterPicker(10, 130, state));
-            state.drawables.add(new WalNutPicker(10, 180, state));
+            state.drawables.add(new PeaShooterPicker(65, 57, state));
+            state.drawables.add(new SunFlowerPicker(130, 57, state));
+            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
+            state.drawables.add(new WalNutPicker(260,57, state));
         }
         if(state.level==5) {
-            state.drawables.add(new PeaShooterPicker(10, 40, state));
-            state.drawables.add(new SunFlowerPicker(10, 80, state));
-            state.drawables.add(new IcedPeaShooterPicker(10, 130, state));
-            state.drawables.add(new WalNutPicker(10, 180, state));
-            state.drawables.add(new CherryBombPicker(10, 230, state));
+            state.drawables.add(new PeaShooterPicker(65, 57, state));
+            state.drawables.add(new SunFlowerPicker(130, 57, state));
+            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
+            state.drawables.add(new WalNutPicker(260, 57, state));
+            state.drawables.add(new CherryBombPicker(325, 57, state));
         }
 
         int grassRows = 4; // TODO: delete  me :p
