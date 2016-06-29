@@ -20,9 +20,9 @@ class LawnMover extends GameObject {
     void move() {
         super.move();
 
-        for (Zombie z : gameState.zombies) {
-            if (x >= z.x) {
-                z.hurt(500000000);
+        for (Drawable z : gameState.drawables) {
+            if (x >= z.x && z instanceof Zombie) {
+                ((Zombie) z).hurt(Integer.MAX_VALUE);
             }
         }
 

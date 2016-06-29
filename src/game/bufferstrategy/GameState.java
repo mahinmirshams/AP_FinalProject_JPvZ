@@ -28,7 +28,6 @@ public class GameState {
     Plant selectedItem = null;
     ArrayList<Drawable> drawables = new ArrayList<Drawable>();
     ArrayList<Selectable> selectables = new ArrayList<Selectable>();
-    ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     int selectedItemValue = 0;
     Boolean gameOver = false;
     int level =1;

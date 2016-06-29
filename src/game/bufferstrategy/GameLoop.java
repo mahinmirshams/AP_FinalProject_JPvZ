@@ -31,10 +31,15 @@ class GameLoop implements Runnable {
 
     private GameFrame canvas;
     private GameState state;
-
+    int grassRows = 1;
+    int [] zombieEntrance = {
+            250,150,350,50,450
+    };
+    int zombieSifficiency = 0;
 
     GameLoop(GameFrame frame) {
         canvas = frame;
+        state = new GameState();
     }
 
     /**
@@ -42,7 +47,7 @@ class GameLoop implements Runnable {
      */
     void init() {
         // Perform all initializations ...
-        state = new GameState();
+
         canvas.addKeyListener(state.getKeyListener());
         canvas.addMouseListener(state.getMouseListener());
         canvas.addMouseMotionListener(state.getMouseMotionListener());
@@ -85,32 +90,9 @@ class GameLoop implements Runnable {
 
         //state.drawables.add(new LawnMover(270, 150,state));
 
-        if(state.level<=2) {
-            state.drawables.add(new PeaShooterPicker(65, 57, state));
-            state.drawables.add(new SunFlowerPicker(130, 57, state));
-        }
-        if(state.level==3) {
-            state.drawables.add(new PeaShooterPicker(65, 57, state));
-            state.drawables.add(new SunFlowerPicker(130, 57, state));
-            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
-        }
-        if(state.level==4) {
-            state.drawables.add(new PeaShooterPicker(65, 57, state));
-            state.drawables.add(new SunFlowerPicker(130, 57, state));
-            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
-            state.drawables.add(new WalNutPicker(260,57, state));
-        }
-        if(state.level==5) {
-            state.drawables.add(new PeaShooterPicker(65, 57, state));
-            state.drawables.add(new SunFlowerPicker(130, 57, state));
-            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
-            state.drawables.add(new WalNutPicker(260, 57, state));
-            state.drawables.add(new CherryBombPicker(325, 57, state));
-        }
-
-        int grassRows = 1;
-        if (state.level>=2) grassRows = 3;
-        if (state.level>=3) grassRows = 5;
+                                                                  //1st 2nd levels pickers
+        state.drawables.add(new PeaShooterPicker(65, 57, state));
+        state.drawables.add(new SunFlowerPicker(130, 57, state));
 
         Timer drawGrassTimer = new Timer();
 
@@ -136,6 +118,7 @@ class GameLoop implements Runnable {
         state.drawables.add(grassRow5);
         state.drawables.add(rollingGrass5);
 
+
         grassRow3.state = Grass.GrassState.Growing;
         rollingGrass3.state = RollingGrass.RollingGrassState.Rolling;
 
@@ -149,6 +132,15 @@ class GameLoop implements Runnable {
             grassRow5.selfDestruction();
             rollingGrass5.selfDestruction();
         }
+
+        if (grassRows == 3) {
+            grassRow1.selfDestruction();
+            rollingGrass1.selfDestruction();
+            grassRow5.selfDestruction();
+            rollingGrass5.selfDestruction();
+        }
+
+
 
         if (grassRows > 1) {
             drawGrassTimer.schedule(new TimerTask() {
@@ -180,44 +172,68 @@ class GameLoop implements Runnable {
             }, 3000L);
         }
 
-        if(state.level>=1) {
-            Random rand = new Random();
-            int value = rand.nextInt(5000);
-            value += 5000;  // Random between 5 and 10 seconds
-            TimerTask Task = new TimerTask() {
+        if(state.level==1) {
+           final Random rand = new Random();
+
+            int valueTimeReg = rand.nextInt(5000);
+            valueTimeReg += 5000;
+            int valueTimeBuck = rand.nextInt(5000);
+            valueTimeBuck += 16000;  // Random between 5 and 13 seconds
+            TimerTask regZombie = new TimerTask() {
                 @Override
                 public void run() {
-                    Zombie z = new RegularZombie(1100, 260, state);
+                    final int value = rand.nextInt(1);
+                    Zombie z = new RegularZombie(1100, zombieEntrance[value], state);
                     state.drawables.add(z);
-                    state.zombies.add(z);
+                    zombieSifficiency++;
+                    if (zombieSifficiency == 2) {
+                        state.level++;
+                        grassRows = 3;
+                        update();
+                    }
                 }
             };
 
-            Timer timer = new Timer();
-            timer.schedule(Task, 15000L, value);
 
-            if (state.zombies.size() >= 5) {
-                state.level++;
-            }
+            Timer timer = new Timer();
+            timer.schedule(regZombie, 15000L, valueTimeReg);
+
+
+
         }
 
-        if(state.level>=2) {
-            Random rand = new Random();
-            int value = rand.nextInt(5000);
-            value += 5000;  // Random between 5 and 10 seconds
-            TimerTask Task = new TimerTask() {
+        if(state.level==2) {
+            final Random rand = new Random();          //chera nemiad to in sharttttttttttttttttttttt
+
+            int valueTimeReg = rand.nextInt(5000);
+            valueTimeReg += 5000;
+            int valueTimeBuck = rand.nextInt(5000);
+            valueTimeBuck += 16000;  // Random between 5 and 13 seconds
+            TimerTask regZombie = new TimerTask() {
                 @Override
                 public void run() {
-                    Zombie z = new RegularZombie(1100, 250 , state);
+                    final int value = rand.nextInt(3);
+                    Zombie z = new RegularZombie(1100, zombieEntrance[value], state);
                     state.drawables.add(z);
-                    state.zombies.add(z);
+
                 }
             };
 
-            Timer timer = new Timer();
-            timer.schedule(Task, 15000L, value);
+            TimerTask buckZombie = new TimerTask() {
+                @Override
+                public void run() {
+                    final int value = rand.nextInt(3);
+                    Zombie z = new BucketHeadZombie(1100, zombieEntrance[value], state);
+                    state.drawables.add(z);
 
-            if (state.zombies.size() >= 5) {
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(regZombie, 15000L, valueTimeReg);
+            Timer timer2 = new Timer();
+            timer2.schedule(buckZombie, 15000L, valueTimeBuck);
+
+            if (zombieSifficiency >= 5) {
                 state.level++;
             }
         }
@@ -312,4 +328,25 @@ class GameLoop implements Runnable {
             }
         }
     }
+
+    void update(){
+        init();
+
+       if(state.level>=2)
+            state.drawables.add(new IcedPeaShooterPicker(195, 57, state));
+
+       if(state.level>=4)
+           state.drawables.add(new WalNutPicker(260,57, state));
+
+       if(state.level>=5)
+            state.drawables.add(new CherryBombPicker(325, 57, state));
+
+        if (state.level>=2) grassRows = 3;
+        if (state.level>=3) grassRows = 5;
+
+
+
+
+    }
 }
+

@@ -41,9 +41,9 @@ public class Main {
             }
         });
 
-        Sound sound = new Sound();
-        Timer soundTimer = new Timer();
-        soundTimer.schedule(sound, 0L, 16000L);
+//        Sound sound = new Sound();
+//        Timer soundTimer = new Timer();
+//        soundTimer.schedule(sound, 0L, 16000L);
     }
 
     static BufferedImage loadImage(String filename) {

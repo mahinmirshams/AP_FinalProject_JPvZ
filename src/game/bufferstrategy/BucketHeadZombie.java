@@ -11,8 +11,7 @@ public class BucketHeadZombie extends Zombie{
         return 2;
     }
 
-    public BucketHeadZombie(int x, int y,GameState state , String bucketHeadZombie  , String IcedBucketHeadZombie) {
-        super(x, y, state , bucketHeadZombie , IcedBucketHeadZombie);
+    BucketHeadZombie(int x, int y, GameState state) {
+        super(x, y, state, "BucketHeadZombie.png", "Regular_Zombieicy.png");  //TODO : fix the icy
     }
-
 }

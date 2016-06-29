@@ -104,5 +104,32 @@ class GameFrame extends JFrame {
         }
 
         g2d.drawString(String.valueOf(state.money), 30, 120);
+        if (state.gameOver) {
+            g2d.setFont(getFont().deriveFont(70.0f));
+            g2d.setPaint(new Color(0, 51, 0));
+            g2d.drawString("باختی", 330, 290);
+        }
+
+        if (state.level==2) {
+            g2d.setFont(getFont().deriveFont(70.0f));
+            g2d.setPaint(new Color(0, 51, 0));
+            g2d.drawString("مرحله بعد", 330, 290);
+        }
+
+        if (state.level==3) {
+            g2d.setFont(getFont().deriveFont(70.0f));
+            g2d.setPaint(new Color(0, 51, 0));
+            g2d.drawString("مرحله بعد", 330, 290);
+        }
+        if (state.level==4) {
+            g2d.setFont(getFont().deriveFont(70.0f));
+            g2d.setPaint(new Color(0, 51, 0));
+            g2d.drawString("مرحله بعد", 330, 290);
+        }
+        if (state.level==5) {
+            g2d.setFont(getFont().deriveFont(70.0f));
+            g2d.setPaint(new Color(0, 51, 0));
+            g2d.drawString("مرحله بعد", 330, 290);
+        }
     }
 }
