@@ -14,7 +14,7 @@ class RollingGrass extends Drawable {
     RollingGrassState state = RollingGrassState.Initial;
 
     RollingGrass(int x, int y, GameState state) {
-        super(x, y, "roll.jpg", 35, 120, state);
+        super(x, y, "roll.jpg", 35, 100, state);
     }
 
     @Override

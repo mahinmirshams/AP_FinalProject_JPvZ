@@ -19,7 +19,7 @@ class Grass extends Drawable {
     private BufferedImage fullImage;
 
     Grass(int x, int y, GameState state) {
-        super(x, y, "gr.png", 0, 110, state);
+        super(x, y, "gr.png", 0, 100, state);
         fullImage = img;
     }
 

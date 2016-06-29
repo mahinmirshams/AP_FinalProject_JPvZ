@@ -48,19 +48,20 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedZombie() {
-        for (Iterator<Drawable> iterator = gameState.drawables.iterator(); iterator.hasNext(); ) {
+        Iterator<Drawable> iterator = gameState.drawables.iterator();
+        while (iterator.hasNext()) {
             Drawable drawable = iterator.next();
             if (drawable instanceof GameObject) {
                 if (
                         (
                                 (x < drawable.x + drawable.width && x >= drawable.x) ||
-                                        (x + width >= drawable.x && x + width <= drawable.x + drawable.width)
+                                (x + width >= drawable.x && x + width <= drawable.x + drawable.width)
                         ) &&
-                                (
-                                        (y > drawable.y && y <= drawable.y + drawable.height) ||
-                                                (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
-                                )
-                        ) {
+                        (
+                                (y > drawable.y && y <= drawable.y + drawable.height) ||
+                                (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
+                        )
+                ) {
                     return (GameObject) drawable;
                 }
             }
@@ -69,7 +70,9 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedPlant() {
-        for (Selectable selectable : gameState.selectables) {
+        Iterator<Selectable> iterator = gameState.selectables.iterator();
+        while (iterator.hasNext()) {
+            Selectable selectable = iterator.next();
 
             if (!selectable.isEmpty() &&
                     (

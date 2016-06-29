@@ -108,7 +108,9 @@ class GameLoop implements Runnable {
             state.drawables.add(new CherryBombPicker(325, 57, state));
         }
 
-        int grassRows = 4; // TODO: delete  me :p
+        int grassRows = 1;
+        if (state.level>=2) grassRows = 3;
+        if (state.level>=3) grassRows = 5;
 
         Timer drawGrassTimer = new Timer();
 
@@ -133,35 +135,49 @@ class GameLoop implements Runnable {
         state.drawables.add(rollingGrass4);
         state.drawables.add(grassRow5);
         state.drawables.add(rollingGrass5);
-    if (state.level>=1) {
-    grassRow3.state = Grass.GrassState.Growing;
-    rollingGrass3.state = RollingGrass.RollingGrassState.Rolling;
-    }
-        if (state.level>=2) {
-            if (grassRows > 1) {
-                drawGrassTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        grassRow2.state = Grass.GrassState.Growing;
-                        rollingGrass2.state = RollingGrass.RollingGrassState.Rolling;
-                        grassRow4.state = Grass.GrassState.Growing;
-                        rollingGrass4.state = RollingGrass.RollingGrassState.Rolling;
-                    }
-                }, 2000L);
-            }
+
+        grassRow3.state = Grass.GrassState.Growing;
+        rollingGrass3.state = RollingGrass.RollingGrassState.Rolling;
+
+        if (grassRows == 1) {
+            grassRow1.selfDestruction();
+            rollingGrass1.selfDestruction();
+            grassRow2.selfDestruction();
+            rollingGrass2.selfDestruction();
+            grassRow4.selfDestruction();
+            rollingGrass4.selfDestruction();
+            grassRow5.selfDestruction();
+            rollingGrass5.selfDestruction();
         }
-        if(state.level>=3) {
-            if (grassRows > 3) {
-                drawGrassTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        grassRow1.state = Grass.GrassState.Growing;
-                        rollingGrass1.state = RollingGrass.RollingGrassState.Rolling;
-                        grassRow5.state = Grass.GrassState.Growing;
-                        rollingGrass5.state = RollingGrass.RollingGrassState.Rolling;
-                    }
-                }, 3000L);
-            }
+
+        if (grassRows > 1) {
+            drawGrassTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    grassRow2.state = Grass.GrassState.Growing;
+                    rollingGrass2.state = RollingGrass.RollingGrassState.Rolling;
+                    grassRow4.state = Grass.GrassState.Growing;
+                    rollingGrass4.state = RollingGrass.RollingGrassState.Rolling;
+
+                    grassRow1.selfDestruction();
+                    rollingGrass1.selfDestruction();
+                    grassRow5.selfDestruction();
+                    rollingGrass5.selfDestruction();
+
+                }
+            }, 2000L);
+        }
+
+        if (grassRows > 3) {
+            drawGrassTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    grassRow1.state = Grass.GrassState.Growing;
+                    rollingGrass1.state = RollingGrass.RollingGrassState.Rolling;
+                    grassRow5.state = Grass.GrassState.Growing;
+                    rollingGrass5.state = RollingGrass.RollingGrassState.Rolling;
+                }
+            }, 3000L);
         }
 
         if(state.level>=1) {
