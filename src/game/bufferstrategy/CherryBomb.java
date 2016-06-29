@@ -16,7 +16,7 @@ class CherryBomb extends Plant {
     }
 
     CherryBomb(int x, int y, GameState state) {
-        super(x, y, "CherryBomb.png", 70, 100, state, 0, 100);
+        super(x, y, "CherryBomb.png", 70, 70, state, 0, 100);
     }
 
     @Override

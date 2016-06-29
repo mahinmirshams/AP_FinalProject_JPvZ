@@ -15,7 +15,7 @@ class PeaShooter extends Plant {
     }
 
     PeaShooter(int x, int y, GameState state) {
-        super(x, y, "Peashooter_HD.png", 70, 100, state, 0, 100);
+        super(x, y, "Peashooter_HD.png", 70, 70, state, 0, 100);
 
     }
 
@@ -33,13 +33,20 @@ class PeaShooter extends Plant {
 
             @Override
             public void run() {
-                Pea icedPea = new Pea(me, gameState);
-                gameState.drawables.add((icedPea));
+                if(me.y == getCollidedZombie().y) {
+                    Pea icedPea = new Pea(me, gameState);
+                    gameState.drawables.add((icedPea));
+                }
             }
 
         };
 
         timer.schedule(Task, 0L, 4000L);
+    }
+
+    @Override
+    GameObject getCollidedZombie() {
+        return super.getCollidedZombie();
     }
 }
 
