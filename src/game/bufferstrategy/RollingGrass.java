@@ -31,7 +31,7 @@ class RollingGrass extends Drawable {
         for (Selectable selectable : gameState.selectables) {
             if (
                     (
-                            (y > selectable.y && y <= selectable.y + 100) ||
+                            (y >= selectable.y && y <= selectable.y + 100) ||
                             (y + height >= selectable.y && (y + height <= 100 + selectable.y))
                     )
                     && this.x >= selectable.x

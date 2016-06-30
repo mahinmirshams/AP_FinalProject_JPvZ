@@ -44,10 +44,15 @@ class Selectable {
     }
 
     void dig() {
-        if (!isEmpty()) currentPlant = null;
+        if (!isEmpty()) {
+            currentPlant.deleteObject();
+            currentPlant = null;
+        }
     }
-
     void setPlantable() {
         plantable = true;
+    }
+    void setUnPlantable() {
+        plantable = false;
     }
 }

@@ -32,7 +32,7 @@ class IcedPeaShooter extends Plant {
             @Override
             public void run() {
                 IcedPea icedPea = new IcedPea(me, gameState);
-                gameState.drawables.add((icedPea));
+                gameState.addDrawables((icedPea));
             }
 
         };

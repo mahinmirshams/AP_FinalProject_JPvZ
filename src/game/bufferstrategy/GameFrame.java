@@ -5,7 +5,8 @@ package game.bufferstrategy;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.Timer;
 import javax.swing.*;
 
 /**
@@ -71,7 +72,7 @@ class GameFrame extends JFrame {
     /**
      * Rendering all game elements based on the game state.
      */
-    private void doRendering(Graphics2D g2d, GameState state) {
+    private void doRendering(final Graphics2D g2d, GameState state) {
 
         g2d.setFont(getFont().deriveFont(20.0f));
         g2d.setPaint(Color.DARK_GRAY);
@@ -84,7 +85,7 @@ class GameFrame extends JFrame {
         Image money = Main.loadImage("plantPanel.png");
         g2d.drawImage(money, -75, 0, 460, 180, null);
 
-        ArrayList<Drawable> drawables = new ArrayList<Drawable>(state.drawables);
+        ArrayList<Drawable> drawables = state.getDrawables();
         for (Drawable drawable : drawables) {
             try {
                 if (drawable.getStateToVisible() <= state.states)
@@ -98,38 +99,23 @@ class GameFrame extends JFrame {
             try {
                 if (!selectable.isEmpty() && selectable.currentPlant.getStateToVisible() <= state.states)
                     selectable.draw(g2d, state);
+                //g2d.drawRect(selectable.x,selectable.y,75,105);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        g2d.drawString(String.valueOf(state.money), 30, 120);
+        g2d.setFont(getFont().deriveFont(15.0f));
+        g2d.drawString(String.valueOf(state.money), 20, 117);
+
+
+        g2d.setFont(getFont().deriveFont(70.0f));
+        g2d.setPaint(new Color(0, 51, 0));
+
         if (state.gameOver) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
             g2d.drawString("باختی", 330, 290);
-        }
-
-        if (state.level==2) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
-            g2d.drawString("مرحله بعد", 330, 290);
-        }
-
-        if (state.level==3) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
-            g2d.drawString("مرحله بعد", 330, 290);
-        }
-        if (state.level==4) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
-            g2d.drawString("مرحله بعد", 330, 290);
-        }
-        if (state.level==5) {
-            g2d.setFont(getFont().deriveFont(70.0f));
-            g2d.setPaint(new Color(0, 51, 0));
-            g2d.drawString("مرحله بعد", 330, 290);
+        } else if(!state.massage.isEmpty()){
+            g2d.drawString(state.massage, 330, 290);
         }
     }
 }

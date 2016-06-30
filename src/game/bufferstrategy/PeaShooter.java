@@ -34,7 +34,7 @@ class PeaShooter extends Plant {
             @Override
             public void run() {
                 Pea icedPea = new Pea(me, gameState);
-                gameState.drawables.add((icedPea));
+                gameState.addDrawables((icedPea));
             }
 
         };

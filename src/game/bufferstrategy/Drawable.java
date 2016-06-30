@@ -1,14 +1,13 @@
 package game.bufferstrategy;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by saeedehspg on 6/21/2016 AD.
  */
 public class Drawable {
 
-    BufferedImage img;
+    Image img;
     int x;
     int y;
     int width;
@@ -38,11 +37,14 @@ public class Drawable {
     void setLocation(int x, int y) {
         this.x = x;
         this.y = y;
-        //jdnskjn
     }
 
     void selfDestruction() {
-        gameState.drawables.remove(this);
+        gameState.deleteDrawable(this);
     }
+
+
+    //TODO: placing ImageIcon
+
 
 }

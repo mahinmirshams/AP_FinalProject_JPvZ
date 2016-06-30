@@ -26,7 +26,7 @@ class CherryBomb extends Plant {
             @Override
             public void run() {
 
-                for (Drawable drawables : gameState.drawables) {
+                for (Drawable drawables : gameState.getDrawables()) {
                     if (drawables instanceof Zombie) {
                         int distance = (int) Math.sqrt(Math.pow((drawables.x - x), 2) + Math.pow((drawables.y - y), 2));
                         if (distance <= explosionradious) {

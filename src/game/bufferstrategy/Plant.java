@@ -8,4 +8,12 @@ abstract class Plant extends GameObject {
         super(x, y, file, width, height, gameState, speed, life);
     }
 
+    @Override
+    void move() {
+        super.move();
+
+        if (x > 1100) {
+            this.life = 0;
+        }
+    }
 }
