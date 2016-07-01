@@ -19,9 +19,13 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  * Created by mahin mirshams on 7/1/2016.
  */
 public class MainMenu {
+     static GameFrame mainframe ;
 
         GameState state;
         JFrame frame ;
+    public MainMenu(String s){
+
+    }
 
         public MainMenu() {
             EventQueue.invokeLater(new Runnable() {
@@ -112,12 +116,12 @@ public class MainMenu {
             public ImagePane() {
                 setOpaque(false);
                 try {
-                    background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/MainMenu.png"));
+                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
 
-                    exitImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
-                    continueImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
-                    startImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
-                    guideImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
+                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
+                    continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
+                    startImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
+                    guideImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -154,13 +158,13 @@ public class MainMenu {
                             EventQueue.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    GameFrame frame = new GameFrame("Java Plants vs Zombies");
-                                    frame.setLocationRelativeTo(null); // put frame at center of screen
-                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                                    frame.setVisible(true);
-                                    frame.initBufferStrategy();
+                                    mainframe = new GameFrame("Java Plants vs Zombies");
+                                    mainframe.setLocationRelativeTo(null); // put frame at center of screen
+                                    mainframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                                    mainframe.setVisible(true);
+                                    mainframe.initBufferStrategy();
                                     // Create and execute the game-loop
-                                    GameLoop game = new GameLoop(frame);
+                                    GameLoop game = new GameLoop(mainframe);
                                     game.init();
                                     ThreadPool.execute(game);
                                     // and the game starts ...

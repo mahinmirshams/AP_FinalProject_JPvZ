@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
  * Created by mahin mirshams on 7/1/2016.
  */
 public class SelectMenu  {
+    MainMenu test ;
     GameState state;
     JFrame frame ;
 
@@ -144,6 +145,8 @@ public class SelectMenu  {
                     if (return2MenuButton.contains(e.getPoint())) {
                         cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 
+                        test = new MainMenu("");
+                        test.mainframe.dispose();
                         frame.dispose();
                         MainMenu mainMenu = new MainMenu();
 
