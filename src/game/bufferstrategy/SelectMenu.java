@@ -107,14 +107,12 @@ public class SelectMenu  {
 
         public ImagePane() {
             setOpaque(false);
-            try {
-                background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\SelectMenu.png"));
-                exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
-                return2MenuImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\returnToMainMenuButton.png"));
-                continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\button2.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+
+                background = (BufferedImage) Main.loadImage("SelectMenu.png");
+                exitImage = (BufferedImage) Main.loadImage("exitButton.png");
+                return2MenuImg = (BufferedImage) Main.loadImage("returnToMainMenuButton.png");
+                continueImg = (BufferedImage) Main.loadImage("button2.png");
+
             exitButton = new Ellipse2D.Float(110, 410, 200, 44);
             continueButton = new Ellipse2D.Float(110, 315, 200, 44);
             return2MenuButton = new Ellipse2D.Float(110, 265, 200, 44);

@@ -19,13 +19,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  * Created by mahin mirshams on 7/1/2016.
  */
 public class MainMenu {
-     static GameFrame mainframe ;
-
-        GameState state;
-        JFrame frame ;
+    static GameFrame mainframe ;
     public MainMenu(String s){
 
     }
+
+        GameState state;
+        JFrame frame ;
+
 
         public MainMenu() {
             EventQueue.invokeLater(new Runnable() {
@@ -115,17 +116,15 @@ public class MainMenu {
 
             public ImagePane() {
                 setOpaque(false);
-                try {
-                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
 
-                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    startImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    guideImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
+                    background = (BufferedImage) Main.loadImage("MainMenu.png");
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                    exitImage = (BufferedImage) Main.loadImage("none.png");
+                    continueImg = (BufferedImage) Main.loadImage("none.png");
+                    startImg = (BufferedImage) Main.loadImage("none.png");
+                    guideImg = (BufferedImage) Main.loadImage("none.png");
+
+
                 exitButton = new Ellipse2D.Float(5, 480, 200,100);
                 startButton = new Ellipse2D.Float(575, 330, 200, 100);
                 continueButton = new Ellipse2D.Float(580, 180, 200, 100);

@@ -9,19 +9,8 @@ import java.util.TimerTask;
 public class CatapultBasketBallZombie extends Zombie {
 
 
-    private enum CatapultZombieState {
-        Walking,
-        Jumping,
-        Destroying,
-        Shooting
-
-    }
-
-    CatapultZombieState state = CatapultZombieState.Walking;
-    int originY;
-    int shootStart;
-    int shootEnd;
-    int basketball = 0;
+    ZombieState state = ZombieState.Walking;
+    private int basketball;
 
 
     CatapultBasketBallZombie(int x, int y, GameState gameState) {
@@ -29,50 +18,43 @@ public class CatapultBasketBallZombie extends Zombie {
     }
 
     @Override
+    void setState(ZombieState state) {
+        this.state = state;
+        super.setState(state);
+    }
+
+    @Override
     void update() {
         super.update();
-        if (state == CatapultZombieState.Walking) {
+        if (state == ZombieState.Walking) {
 
             move();
 
 
             if (x == 800) {
-                state = CatapultZombieState.Shooting;
-            }
-        }
-        if (state == CatapultZombieState.Shooting) {
-            final CatapultBasketBallZombie me = this;
-            Timer ball = new Timer();
-            TimerTask ballTask = new TimerTask() {
-                @Override
-                public void run() {
-                    BasketBall ball = new BasketBall(me, gameState);
-                    originY = ball.y;
-                    shootStart = ball.x;
-                    for (Selectable selectable : gameState.selectables) {
-                            if (selectable.y == me.y && selectable != null) {
-                                shootEnd = selectable.y;
-                                y = (int) (originY + (0.01 * (x - shootStart) * (x - shootEnd)));
+                setState(ZombieState.Shooting);
+                final CatapultBasketBallZombie me = this;
+                Timer ball = new Timer();
+                TimerTask ballTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (basketball >= 10) {
+                            setState(ZombieState.Walking);
+                            this.cancel();
+                            return;
+                        }
+
+                        for (Selectable selectable : gameState.selectables) {
+                            if (selectable.y == me.y && !selectable.isEmpty()) {
+                                gameState.addDrawables(new BasketBall(me, gameState, y, x, selectable.x));
+                                basketball++;
                             }
-
+                        }
                     }
-                }
+                };
 
-
-            };
-            basketball++;
-            if (basketball < 10) {
-                ball.schedule(ballTask, 1000);
-            } else state = CatapultZombieState.Destroying;
-
-        }
-        if (state == CatapultZombieState.Destroying) {
-            GameObject collidedZombie = getCollidedZombie();
-            if (collidedZombie != null && collidedZombie instanceof Plant) {
-                collidedZombie.hurt(Integer.MAX_VALUE);
+                ball.schedule(ballTask, 0, 1000);
             }
-
-
         }
     }
 }

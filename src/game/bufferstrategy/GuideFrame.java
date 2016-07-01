@@ -97,12 +97,11 @@ public class GuideFrame  {
 
             public ImagePane() {
                 setOpaque(false);
-                try {
-                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\Guide.png"));
-                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\arrow.png"));
-                   } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+
+
+                    background = (BufferedImage) Main.loadImage("Guide.png");
+                    exitImage = (BufferedImage) Main.loadImage("arrow.png");
+
                 exitButton = new Ellipse2D.Float(380, 420, 200, 44);
 
                 MouseAdapter handler = new MouseAdapter() {

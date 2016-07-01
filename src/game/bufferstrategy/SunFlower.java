@@ -16,6 +16,11 @@ class SunFlower extends Plant {
 
     SunFlower(int x, int y, GameState state) {
         super(x, y, "sunflower.gif", 70, 100, state, 0, 100);
+    }
+
+    @Override
+    void planted() {
+        super.planted();
         makeSun();
     }
 
@@ -30,7 +35,7 @@ class SunFlower extends Plant {
 
         };
 
-        timer.schedule(Task, 0L, 7000L);
+        timer.schedule(Task, 2000L, 7000L);
     }
 
     @Override

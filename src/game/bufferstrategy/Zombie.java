@@ -9,10 +9,12 @@ import java.util.TimerTask;
 
 abstract class Zombie extends GameObject {
 
-    private enum ZombieState {
+    enum ZombieState {
         Walking,
         Jumping,
-        Chewing
+        Chewing,
+        Destroying,
+        Shooting
     }
 
     ZombieState state = ZombieState.Walking;
@@ -29,6 +31,10 @@ abstract class Zombie extends GameObject {
     int originY;
     int jumpStart;
     int jumpEnd;
+
+    void setState(ZombieState state){
+        this.state = state;
+    }
 
     @Override
     int getStateToVisible() {
@@ -55,7 +61,7 @@ abstract class Zombie extends GameObject {
 
                 GameObject collidedObject = getCollidedPlant();
                 if (collidedObject != null && collidedObject instanceof Plant) {
-                    if(!(this instanceof PoleVaultingZombie)  || ((this instanceof PoleVaultingZombie) && hasJumped == true) ) {
+                    if(!(this instanceof PoleVaultingZombie)  || ((this instanceof PoleVaultingZombie) && hasJumped) ) {
                         state = ZombieState.Chewing;
                         chewTimerTask = new TimerTask() {
                             @Override
@@ -74,7 +80,7 @@ abstract class Zombie extends GameObject {
                         originY = y;
                         jumpStart = x;
                         jumpEnd = getCollidedPlant().x - 100;
-                        hasJumped =true;
+                        hasJumped = true;
                     }
                 }
             }
