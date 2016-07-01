@@ -1,245 +1,101 @@
 package game.bufferstrategy;
 
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
+import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 /**
- * Created by mahin mirshams on 7/1/2016.
+ * Created by mahin mirshams on 6/29/2016.
  */
-public class MainMenu {
+public class MainMenu extends JFrame {
 
-        GameState state;
-        JFrame frame ;
+    private JPanel  menuPanel;
+    private JLabel label ;
+    private JButton button ;
+    private ImageIcon img ;
 
-        public MainMenu() {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception ex) {
-                    }
-                    frame = new JFrame("SelectMenu");
-                    frame.setUndecorated(true);
-                    frame.setContentPane(new ContentPane());
 
-                    if (supportsPerAlphaPixel()) {
-                        setOpaque(frame, false);
-                    }
-                    frame.setLayout(new BorderLayout());
-                    frame.add(new ImagePane());
-                    frame.pack();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                }
-            });
+
+
+    public MainMenu(String title ){
+
+        super(title);
+        setSize(1000,750);
+        setLocation(200 , 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setLayout(null);
+
+        img = new ImageIcon("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png") ;
+        label = new JLabel(img) ;
+
+        label.setOpaque(true);
+        label.setLocation(0 , -116 );
+        label.setSize(1000 , 1000 );
+        add(label) ;
+
+        setVisible(true);
+
+/*
+
+        try {
+            // Load the background image
+            BufferedImage img = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
+
+            // Create the frame...
+
+            // Set the frames content pane to use a JLabel
+            // whose icon property has been set to use the image
+            // we just loaded
+            setContentPane(new JLabel(new ImageIcon(img)));
+
+            setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+
+            add(new JLabel("Hello world") , gbc);
+            add(new JLabel("I'm on top") , gbc);
+            add(button , gbc);
+
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+
+            // Supply a layout manager for the body of the content
+            // Add stuff...
+             } catch (IOException exp) {
+            exp.printStackTrace();
         }
 
-        public static boolean supportsPerAlphaPixel() {
+*/
 
-            boolean support = false;
+        /*
 
-            try {
+        setLayout(new GridLayout());
+        label = new JLabel("I`m a label");
+        label.setBackground(Color.ORANGE);
+        label.setOpaque(true);//mat mikone jlabel ro
+        add(label  , BorderLayout.CENTER);
+*/
 
-                support = true;
+/*
+        button = new JButton("click me ");
+        button.setForeground(Color.RED);
+        add(button , BorderLayout.SOUTH);
 
-            } catch (Exception exp) {
-            }
-
-            return support;
-
-        }
-
-        public static void setOpaque(Window window, boolean opaque) {
-
-            try {
-
-                Class<?> awtUtilsClass = Class.forName("com.sun.awt.AWTUtilities");
-                if (awtUtilsClass != null) {
-
-                    Method method = awtUtilsClass.getMethod("setWindowOpaque", Window.class, boolean.class);
-                    method.invoke(null, window, opaque);
-
-                }
-
-            } catch (Exception exp) {
-            }
-
-        }
-
-        public class ContentPane extends JPanel {
-
-            public ContentPane() {
-                setOpaque(false);
-            }
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-            }
-        }
-
-        public class ImagePane extends JPanel {
-
-            private BufferedImage background;
-
-            private BufferedImage exitImage;
-            private BufferedImage continueImg;
-            private BufferedImage startImg;
-            private BufferedImage guideImg;
-
-            private Ellipse2D exitButton;
-            private Ellipse2D continueButton;
-            private Ellipse2D startButton;
-            private Ellipse2D guideButton;
-
-
-
-            private boolean mouseIn = false;
-
-            public ImagePane() {
-                setOpaque(false);
-                try {
-                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
-                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
-                    continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\returnToMainMenuButton.png"));
-                    startImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\startFromThePreLevel.png"));
-                    guideImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\arrow.png"));
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                exitButton = new Ellipse2D.Float(10, 510, 200, 44);
-                startButton = new Ellipse2D.Float(110, 315, 200, 44);
-                continueButton = new Ellipse2D.Float(110, 265, 200, 44);
-                guideButton = new Ellipse2D.Float(110, 365, 200, 44);
-
-
-
-                MouseAdapter handler = new MouseAdapter() {
-
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-
-                        Cursor cursor = Cursor.getDefaultCursor();
-                        if (exitButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            System.exit(1);
-                        }
-
-
-                        if (guideButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            GuideFrame guideFrame = new GuideFrame();
-                        }
-
-                        if (startButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            frame.dispose();
-                            // After the player clicks 'PLAY' ...
-                            EventQueue.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    GameFrame frame = new GameFrame("Java Plants vs Zombies");
-                                    frame.setLocationRelativeTo(null); // put frame at center of screen
-                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                                    frame.setVisible(true);
-                                    frame.initBufferStrategy();
-                                    // Create and execute the game-loop
-                                    GameLoop game = new GameLoop(frame);
-                                    game.init();
-                                    ThreadPool.execute(game);
-                                    // and the game starts ...
-                                }
-                            });
-
-
-                        }
-                        if (continueButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-
-                            frame.dispose();
-                            MainMenu mainMenu = new MainMenu();
-
-
-                        }
-                        setCursor(cursor);
-
-                    }
-
-                    @Override
-                    public void mouseMoved(MouseEvent e) {
-                        Cursor cursor = Cursor.getDefaultCursor();
-                        if (exitButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                        }
-                        if (startButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-
-
-                        }
-                        if (guideButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                        }
-                        if (continueButton.contains(e.getPoint())) {//TODO select the level to start from
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                        }
-                        setCursor(cursor);
-                    }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        mouseIn = true;
-                        repaint();
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        mouseIn = false;
-                        repaint();
-                    }
-
-                };
-                addMouseListener(handler);
-                addMouseMotionListener(handler);
-            }
-
-            @Override
-            public Dimension getPreferredSize() {
-                return background == null ? new Dimension(400, 400) : new Dimension(background.getWidth(), background.getHeight());
-            }
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (background != null) {
-                    Graphics2D g2d = (Graphics2D) g.create();
-                    int x = (getWidth() - background.getWidth()) / 2;
-                    int y = (getHeight() - background.getHeight()) / 2;
-                    g2d.drawImage(background, x, y, this);
-                    if (mouseIn && exitImage != null) {
-
-                        g2d.drawImage(exitImage, (int) exitButton.getX(), (int) exitButton.getY(), this);
-                        g2d.drawImage(continueImg, (int) continueButton.getX(), (int)continueButton.getY(), this);
-                        g2d.drawImage(startImg, (int) startButton.getX(), (int) startButton.getY(), this);
-                        g2d.drawImage(guideImg, (int) guideButton.getX(), (int) guideButton.getY(), this);
-
-                    }
-                    g2d.dispose();
-                }
-            }
-        }
+        setVisible(true);*/
     }
+}
+

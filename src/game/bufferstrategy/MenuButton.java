@@ -9,8 +9,8 @@ public class MenuButton extends Drawable {
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         SelectMenu selectMenu = new SelectMenu();
     }
 }
