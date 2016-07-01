@@ -6,7 +6,7 @@ package game.bufferstrategy;
 class IcedPeaShooterPicker extends PlantsPicker {
 
     IcedPeaShooterPicker(int x, int y, GameState state) {
-        super(x, y, "IcedPeaShooterPicker.jpg", "Snow_Pea_(HD_size).png", state);
+        super(x, y, "Icedpeashooter2.png", "Snow_Pea_(HD_size).png", state);
     }
 
     @Override

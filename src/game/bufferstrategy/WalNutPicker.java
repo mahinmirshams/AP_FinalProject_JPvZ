@@ -6,7 +6,7 @@ package game.bufferstrategy;
 class WalNutPicker extends PlantsPicker {
 
     WalNutPicker(int x, int y, GameState state) {
-        super(x, y, "WalNutPicker.jpg", "WalNut.png", state);
+        super(x, y, "walnutpicker.png", "WalNut.png", state);
     }
 
     @Override
