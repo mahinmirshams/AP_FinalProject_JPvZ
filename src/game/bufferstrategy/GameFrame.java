@@ -109,14 +109,13 @@ class GameFrame extends JFrame {
         g2d.setFont(getFont().deriveFont(15.0f));
         g2d.drawString(String.valueOf(state.money), 23, 67);
 
-
-        g2d.setFont(getFont().deriveFont(70.0f));
-        g2d.setPaint(new Color(0, 51, 0));
+        g2d.setFont(new Font("A Afsaneh", Font.PLAIN, 100));
+        g2d.setPaint(new Color(51, 77, 0));
 
         if (state.gameOver) {
-            g2d.drawString("باختی", 330, 290);
+            g2d.drawString("باختی", 530, 290);
         } else if(!state.massage.isEmpty()){
-            g2d.drawString(state.massage, 330, 290);
+            g2d.drawString(state.massage, 530, 290);
         }
     }
 }
