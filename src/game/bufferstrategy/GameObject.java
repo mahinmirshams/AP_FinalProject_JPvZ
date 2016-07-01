@@ -1,8 +1,5 @@
 package game.bufferstrategy;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 /**
  * Created by saeedehspg on 6/25/2016 AD.
  */
@@ -49,9 +46,7 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedZombie() {
-        Iterator<Drawable> iterator = gameState.getDrawables().iterator();
-        while (iterator.hasNext()) {
-            Drawable drawable = iterator.next();
+        for (Drawable drawable : gameState.getDrawables()) {
             if (drawable instanceof Zombie) {
                 if (
                         (
@@ -60,7 +55,7 @@ abstract class GameObject extends Drawable {
                         ) &&
                         (
                                 (y > drawable.y && y <= drawable.y + drawable.height) ||
-                               (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
+                                (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
                         )
                 ) {
                     return (GameObject) drawable;
@@ -71,11 +66,9 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedPlant() {
-        Iterator<Selectable> iterator = new ArrayList<Selectable>(gameState.selectables).iterator();
-        while (iterator.hasNext()) {
-            Selectable selectable = iterator.next();
-
-            if (!selectable.isEmpty() &&
+        for (Selectable selectable : gameState.selectables) {
+            if (
+                    !selectable.isEmpty() &&
                     (
                             (x < selectable.x + selectable.currentPlant.width && x > selectable.currentPlant.x) ||
                             (x + width > selectable.currentPlant.x && x + width < selectable.currentPlant.x + selectable.currentPlant.width)
@@ -88,7 +81,6 @@ abstract class GameObject extends Drawable {
                 return selectable.currentPlant;
             }
         }
-
         return null;
     }
 }

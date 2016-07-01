@@ -9,9 +9,9 @@ class Level {
     private int[] zombieEntrance = {
             250,150,350,50,450
     };
-    private HashMap<Integer, Zombie> generateZombies = new HashMap<Integer, Zombie>();
+    private HashMap<Integer, Zombie> zombiesToSpawn = new HashMap<Integer, Zombie>();
     private ArrayList<TimerTask> zombiesTimerTasks = new ArrayList<TimerTask>();
-    private Timer zombiesTimer = new Timer();
+    private Timer zombiesSpawnTimer = new Timer();
     GameState state;
 
     Level(GameState state) {
@@ -19,16 +19,16 @@ class Level {
     }
 
     void init() {
-        for (final Integer delay: generateZombies.keySet()) {
+        for (final Integer delay: zombiesToSpawn.keySet()) {
             TimerTask spawnTimerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    state.addDrawables(generateZombies.get(delay));
+                    state.addDrawables(zombiesToSpawn.get(delay));
                 }
             };
 
             zombiesTimerTasks.add(spawnTimerTask);
-            zombiesTimer.schedule(spawnTimerTask, delay + 15000 /* Level initial delay */);
+            zombiesSpawnTimer.schedule(spawnTimerTask, delay + 15000 /* Level initial delay */);
         }
     }
 
@@ -144,7 +144,7 @@ class Level {
     }
 
     void update() {
-        if (state.killedZombie >= generateZombies.size()) {
+        if (state.killedZombie >= zombiesToSpawn.size()) {
             levelCompleted();
         }
     }
@@ -153,8 +153,8 @@ class Level {
         for (TimerTask timerTask : zombiesTimerTasks) {
             timerTask.cancel();
         }
-        zombiesTimer.purge();
-        zombiesTimer.cancel();
+        zombiesSpawnTimer.purge();
+        zombiesSpawnTimer.cancel();
     }
 
     enum ZombieType {
@@ -166,13 +166,13 @@ class Level {
 
     void makeRandomZombiesOfType(ZombieType zombieType, int count, int grassRows) {
         final Random rand = new Random();
-        int Delays = 0;
+        int accumulatedDelay = 0;
 
         for (int i = 0; i < count; i++) {
             int randomDelay = rand.nextInt(5000);
             randomDelay += 5000;
 
-            Delays += randomDelay;
+            accumulatedDelay += randomDelay;
 
             Zombie zombie;
 
@@ -196,7 +196,7 @@ class Level {
                     continue;
             }
 
-            generateZombies.put(Delays, zombie);
+            zombiesToSpawn.put(accumulatedDelay, zombie);
         }
     }
 

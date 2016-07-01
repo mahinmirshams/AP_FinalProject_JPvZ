@@ -44,12 +44,9 @@ public class Main {
             }
         });
 
-        Sound sound = new Sound();
-        //Timer soundTimer = new Timer();
-        //soundTimer.schedule(sound, 0L, 16000L);
-        //Menu menu = new Menu( );
-        MainMenu mainMenu = new MainMenu("hi");
-        SelectMenu selectMenu = new SelectMenu();
+//        Sound sound = new Sound();
+//        Timer soundTimer = new Timer();
+//        soundTimer.schedule(sound, 0L, 16000L);
     }
 
     static Image loadImage(String filename) {
