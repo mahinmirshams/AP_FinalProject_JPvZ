@@ -1,48 +1,38 @@
 package game.bufferstrategy;
 
-
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
 
+import static com.sun.awt.AWTUtilities.setWindowOpaque;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  * Created by mahin mirshams on 7/1/2016.
  */
 public class MainMenu {
-    static GameFrame mainframe ;
-    public MainMenu(String s){
-
-    }
 
         GameState state;
-        JFrame frame ;
+        private JFrame frame ;
 
-
-        public MainMenu() {
+        MainMenu() {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception ex) {
-                    }
+                    } catch (Exception ignored) {}
+
                     frame = new JFrame("SelectMenu");
                     frame.setUndecorated(true);
                     frame.setContentPane(new ContentPane());
 
-                    if (supportsPerAlphaPixel()) {
-                        setOpaque(frame, false);
-                    }
+                    setWindowOpaque(frame, false);
+
                     frame.setLayout(new BorderLayout());
                     frame.add(new ImagePane());
                     frame.pack();
@@ -52,41 +42,9 @@ public class MainMenu {
             });
         }
 
-        public static boolean supportsPerAlphaPixel() {
+        private class ContentPane extends JPanel {
 
-            boolean support = false;
-
-            try {
-
-                support = true;
-
-            } catch (Exception exp) {
-            }
-
-            return support;
-
-        }
-
-        public static void setOpaque(Window window, boolean opaque) {
-
-            try {
-
-                Class<?> awtUtilsClass = Class.forName("com.sun.awt.AWTUtilities");
-                if (awtUtilsClass != null) {
-
-                    Method method = awtUtilsClass.getMethod("setWindowOpaque", Window.class, boolean.class);
-                    method.invoke(null, window, opaque);
-
-                }
-
-            } catch (Exception exp) {
-            }
-
-        }
-
-        public class ContentPane extends JPanel {
-
-            public ContentPane() {
+            ContentPane() {
                 setOpaque(false);
             }
 
@@ -96,7 +54,7 @@ public class MainMenu {
             }
         }
 
-        public class ImagePane extends JPanel {
+        private class ImagePane extends JPanel {
 
             private BufferedImage background;
 
@@ -114,8 +72,9 @@ public class MainMenu {
 
             private boolean mouseIn = false;
 
-            public ImagePane() {
+            ImagePane() {
                 setOpaque(false);
+
 
                     background = (BufferedImage) Main.loadImage("MainMenu.png");
 
@@ -147,7 +106,7 @@ public class MainMenu {
 
                         if (guideButton.contains(e.getPoint())) {
                             cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            GuideFrame guideFrame = new GuideFrame();
+                            new GuideFrame();
                         }
 
                         if (startButton.contains(e.getPoint())) {
@@ -157,14 +116,13 @@ public class MainMenu {
                             EventQueue.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mainframe = new GameFrame("Java Plants vs Zombies");
-                                    mainframe.setLocationRelativeTo(null); // put frame at center of screen
-                                    mainframe.setUndecorated(true);
-                                    mainframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                                    mainframe.setVisible(true);
-                                    mainframe.initBufferStrategy();
+                                    GameFrame frame = new GameFrame("Java Plants vs Zombies");
+                                    frame.setLocationRelativeTo(null); // put frame at center of screen
+                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                                    frame.setVisible(true);
+                                    frame.initBufferStrategy();
                                     // Create and execute the game-loop
-                                    GameLoop game = new GameLoop(mainframe);
+                                    GameLoop game = new GameLoop(frame);
                                     game.init();
                                     ThreadPool.execute(game);
                                     // and the game starts ...

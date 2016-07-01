@@ -30,7 +30,7 @@ class GameFrame extends JFrame {
     GameFrame(String title) {
         super(title);
         setResizable(false);
-//		setUndecorated(true);
+		setUndecorated(true);
         setSize(GAME_WIDTH, GAME_HEIGHT);
         //
         // Initialize the JFrame ...

@@ -1,39 +1,36 @@
 package game.bufferstrategy;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
+
+import static com.sun.awt.AWTUtilities.setWindowOpaque;
 
 /**
  * Created by mahin mirshams on 7/1/2016.
  */
-public class GuideFrame  {
+class GuideFrame  {
 
         GameState state;
-        JFrame frame ;
+        private JFrame frame ;
 
-        public GuideFrame() {
+        GuideFrame() {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception ex) {
-                    }
+                    } catch (Exception ignored) {}
+
                     frame = new JFrame("SelectMenu");
                     frame.setUndecorated(true);
                     frame.setContentPane(new ContentPane());
+                    setWindowOpaque(frame, false);
 
-                    if (supportsPerAlphaPixel()) {
-                        setOpaque(frame, false);
-                    }
+
                     frame.setLayout(new BorderLayout());
                     frame.add(new ImagePane());
                     frame.pack();
@@ -43,41 +40,9 @@ public class GuideFrame  {
             });
         }
 
-        public static boolean supportsPerAlphaPixel() {
+        private class ContentPane extends JPanel {
 
-            boolean support = false;
-
-            try {
-
-                support = true;
-
-            } catch (Exception exp) {
-            }
-
-            return support;
-
-        }
-
-        public static void setOpaque(Window window, boolean opaque) {
-
-            try {
-
-                Class<?> awtUtilsClass = Class.forName("com.sun.awt.AWTUtilities");
-                if (awtUtilsClass != null) {
-
-                    Method method = awtUtilsClass.getMethod("setWindowOpaque", Window.class, boolean.class);
-                    method.invoke(null, window, opaque);
-
-                }
-
-            } catch (Exception exp) {
-            }
-
-        }
-
-        public class ContentPane extends JPanel {
-
-            public ContentPane() {
+            ContentPane() {
                 setOpaque(false);
             }
 
@@ -87,7 +52,7 @@ public class GuideFrame  {
             }
         }
 
-        public class ImagePane extends JPanel {
+        private class ImagePane extends JPanel {
 
             private BufferedImage background;
             private BufferedImage exitImage;
@@ -95,7 +60,7 @@ public class GuideFrame  {
 
             private boolean mouseIn ;
 
-            public ImagePane() {
+            ImagePane() {
                 setOpaque(false);
 
 
