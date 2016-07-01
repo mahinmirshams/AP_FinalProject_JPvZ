@@ -21,9 +21,10 @@ class Level4 extends Level {
 
         drawGrasses(grassRows);
 
-        state.addDrawables(new PeaShooterPicker(65, 57, state));
-        state.addDrawables(new SunFlowerPicker(130, 57, state));
-        state.addDrawables(new IcedPeaShooterPicker(195, 57, state));
-        state.addDrawables(new WalNutPicker(260,57, state));
+        state.addDrawables(new PeaShooterPicker(60, 10, state));
+        state.addDrawables(new SunFlowerPicker(112, 10, state));
+        state.addDrawables(new IcedPeaShooterPicker(164, 10, state));
+        state.addDrawables(new MushroomPicker(216, 10, state));
+        state.addDrawables(new WalNutPicker(268,10, state));
     }
 }

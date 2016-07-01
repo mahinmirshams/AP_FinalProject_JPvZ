@@ -3,9 +3,12 @@ package game.bufferstrategy;
 import java.awt.*;
 
 /**
- * Created by saeedehspg on 6/22/2016 AD.
+ * A class which is extended from Drawable which shows the roll of grass
  */
 class RollingGrass extends Drawable {
+    /**
+     * 2 RollingGrass states
+     */
     enum RollingGrassState {
         Initial,
         Rolling
@@ -13,9 +16,21 @@ class RollingGrass extends Drawable {
 
     RollingGrassState state = RollingGrassState.Initial;
 
+    /**
+     * RollingGrass Constructor
+     * @param x
+     * @param y
+     * @param state
+     */
+
     RollingGrass(int x, int y, GameState state) {
         super(x, y, "roll.jpg", 35, 100, state);
     }
+
+    /**
+     * overriden method of Drawable class which draw the RollingGrass graphically rolling step by step
+     * @param g2d
+     */
 
     @Override
     public void draw(Graphics2D g2d) {
