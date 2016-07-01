@@ -43,6 +43,7 @@ public class GameState {
     private Selectable pointedSelectable;
     PlantsPicker pointedPicker;
     boolean pointingToPicker = true;
+    boolean digISOn = false;
 
 
     public GameState() {

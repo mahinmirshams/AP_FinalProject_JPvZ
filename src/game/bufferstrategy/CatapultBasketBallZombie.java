@@ -26,8 +26,8 @@ class CatapultBasketBallZombie extends Zombie {
 
     @Override
     void deleteObject() {
-        super.deleteObject();
         timer.cancel();
+        super.deleteObject();
     }
 
     @Override
@@ -36,7 +36,7 @@ class CatapultBasketBallZombie extends Zombie {
         if (state == ZombieState.Walking) {
 
             move();
-            
+
             if (x >= 800 && x <= 810) {
                 setState(ZombieState.Shooting);
                 final CatapultBasketBallZombie me = this;
