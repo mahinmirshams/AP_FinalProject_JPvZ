@@ -13,7 +13,7 @@ class Level5 extends Level {
     void init() {
         int grassRows = 5;
 
-        makeRandomZombiesOfType(ZombieType.Regular, 4, grassRows);
+        makeRandomZombiesOfType(ZombieType.Regular, 8, grassRows);
         makeRandomZombiesOfType(ZombieType.BucketHead, 2, grassRows);
         makeRandomZombiesOfType(ZombieType.PoleVaulting, 2, grassRows);
         makeRandomZombiesOfType(ZombieType.CatapultBasketBall, 2, grassRows);

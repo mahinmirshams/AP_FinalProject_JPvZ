@@ -67,9 +67,6 @@ class Level {
             case 5:
                 state.currentLevel = new Level5(state);
                 break;
-            default:
-                state.gameOver = true;
-                return;
         }
         state.currentLevel.init();
     }

@@ -98,8 +98,8 @@ public class MainMenu {
         public ImagePane() {
             setOpaque(false);
             try {
-                background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
-                offImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
+                background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/MainMenu.png"));
+                offImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/exitButton.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

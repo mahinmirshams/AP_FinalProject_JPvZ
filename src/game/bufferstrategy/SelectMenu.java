@@ -100,9 +100,9 @@ public class SelectMenu {
         public ImagePane() {
             setOpaque(false);
             try {
-                background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\SelectMenu.png"));
-                offImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
-                button2 = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\returnToMainMenuButton.png"));
+                background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/SelectMenu.png"));
+                offImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/exitButton.png"));
+                button2 = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/returnToMainMenuButton.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

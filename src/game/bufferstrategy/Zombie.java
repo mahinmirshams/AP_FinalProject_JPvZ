@@ -11,6 +11,7 @@ abstract class Zombie extends GameObject {
 
     private enum ZombieState {
         Walking,
+        Jumping,
         Chewing
     }
 
@@ -23,6 +24,11 @@ abstract class Zombie extends GameObject {
     private int chewStrength = 20;
     private Timer chewTimer = new Timer();
     private TimerTask chewTimerTask = null;
+    boolean hasJumped = false;
+
+    int originY;
+    int jumpStart;
+    int jumpEnd;
 
     @Override
     int getStateToVisible() {
@@ -43,25 +49,35 @@ abstract class Zombie extends GameObject {
                 move();
 
                 if (x <= 230) {
-                    gameState.gameOver = true;
+                    gameState.gameOver  = true;
                 }
 
                 GameObject collidedObject = getCollidedPlant();
                 if (collidedObject != null && collidedObject instanceof Plant) {
-                    state = ZombieState.Chewing;
-                    chewTimerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            GameObject collidedPlant = getCollidedPlant();
-                            if (collidedPlant != null) {
-                                collidedPlant.hurt(chewStrength);
+                    if(!(this instanceof PoleVaultingZombie)  || ((this instanceof PoleVaultingZombie) && hasJumped == true) ) {
+                        state = ZombieState.Chewing;
+                        chewTimerTask = new TimerTask() {
+                            @Override
+                            public void run() {
+                                GameObject collidedPlant = getCollidedPlant();
+                                if (collidedPlant != null) {
+                                    collidedPlant.hurt(chewStrength);
+                                }
                             }
-                        }
-                    };
+                        };
 
-                    chewTimer.schedule(chewTimerTask, 0L, 500L);
+                        chewTimer.schedule(chewTimerTask, 0L, 500L);
+                    }
+                    else {
+                        state = ZombieState.Jumping;
+                        originY = y;
+                        jumpStart = x;
+                        jumpEnd = getCollidedPlant().x - 100;
+                        hasJumped =true;
+                    }
                 }
-            } else {
+            }
+            else if(state == ZombieState.Chewing) {
                 // Chewing
                 GameObject collidedObject = getCollidedPlant();
                 if (collidedObject == null) {
@@ -71,6 +87,14 @@ abstract class Zombie extends GameObject {
                     chewTimer.purge();
                 }
             }
+            else if(state == ZombieState.Jumping){
+                if (x > jumpEnd)
+                    y = (int) (originY + (0.01 * (x-jumpStart) * (x-jumpEnd)));
+                else
+                    state = ZombieState.Walking;
+                move();
+            }
+
         }
     }
 
