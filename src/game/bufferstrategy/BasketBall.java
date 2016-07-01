@@ -9,7 +9,7 @@ class BasketBall extends GameObject {
     private int shootEnd;
 
     BasketBall(CatapultBasketBallZombie catapultBasketBallZombie, GameState gameState, int y, int startX, int endX) {
-        super(catapultBasketBallZombie.x, catapultBasketBallZombie.y, "ball.jpg", 20, 20, gameState, 6, Integer.MAX_VALUE);
+        super(catapultBasketBallZombie.x, catapultBasketBallZombie.y, "ball.png", 20, 20, gameState, 6, Integer.MAX_VALUE);
         originY = y;
         shootStart = startX;
         shootEnd = endX;
