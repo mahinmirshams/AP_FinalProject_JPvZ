@@ -1,11 +1,14 @@
 package game.bufferstrategy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static com.sun.awt.AWTUtilities.setWindowOpaque;
@@ -31,7 +34,8 @@ public class MainMenu {
                 public void run() {
                     try {
                         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception ignored) {}
+                    } catch (Exception ignored) {
+                    }
 
                     frame = new JFrame("SelectMenu");
                     frame.setUndecorated(true);
@@ -44,6 +48,12 @@ public class MainMenu {
                     frame.pack();
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
+
+                    try {
+                        frame.setIconImage(ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\zombieHead.png")));
+                    } catch (IOException exc) {
+                        exc.printStackTrace();
+                    }
                 }
             });
         }
@@ -93,7 +103,7 @@ public class MainMenu {
                 exitButton = new Ellipse2D.Float(5, 480, 200,100);
                 startButton = new Ellipse2D.Float(575, 330, 200, 100);
                 continueButton = new Ellipse2D.Float(580, 180, 200, 100);
-                guideButton = new Ellipse2D.Float(775, 610, 200, 44);
+                guideButton = new Ellipse2D.Float(775, 610, 200, 100);
 
 
 
@@ -112,7 +122,7 @@ public class MainMenu {
 
                         if (guideButton.contains(e.getPoint())) {
                             cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            new GuideFrame();
+                            GuideFrame guideFrame =new GuideFrame();
                         }
 
                         if (startButton.contains(e.getPoint())) {
@@ -128,6 +138,11 @@ public class MainMenu {
                                     mainframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
                                     mainframe.setVisible(true);
                                     mainframe.initBufferStrategy();
+                                    try {
+                                        mainframe.setIconImage(ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\zombieHead.png")));
+                                    } catch (IOException exc) {
+                                        exc.printStackTrace();
+                                    }
                                     // Create and execute the game-loop
                                     GameLoop game = new GameLoop(mainframe);
                                     game.init();

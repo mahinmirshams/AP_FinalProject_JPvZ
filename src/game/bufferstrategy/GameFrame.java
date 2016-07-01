@@ -3,9 +3,12 @@
  ***/
 package game.bufferstrategy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +33,15 @@ class GameFrame extends JFrame {
     GameFrame(String title) {
         super(title);
         setResizable(false);
-		setUndecorated(true);
+        setUndecorated(true);
         setSize(GAME_WIDTH, GAME_HEIGHT);
+
+    }
+
         //
         // Initialize the JFrame ...
         //
-    }
+
 
     /**
      * This must be called once after the JFrame is shown:
