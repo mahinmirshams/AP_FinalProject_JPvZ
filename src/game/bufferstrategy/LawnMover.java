@@ -3,9 +3,16 @@ package game.bufferstrategy;
 import java.awt.*;
 
 /**
- * A class which is extended from GameObject that controlls
+ * A class which is extended from GameObject that controlls the lawnMovers that kill the zombies when they first come near the house
  */
 class LawnMover extends GameObject {
+    /**
+     * LawnMover constructor
+     * @param x
+     * @param y
+     * @param state
+     */
+
 
     LawnMover(int x, int y, GameState state) {
         super(x, y, "Lawn_Mower.png", 100, 80, state, 0, 700000000);
