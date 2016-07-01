@@ -4,8 +4,6 @@
 package game.bufferstrategy;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.util.*;
 import java.util.Timer;
@@ -87,17 +85,6 @@ class GameFrame extends JFrame {
         Image money = Main.loadImage("plantPanel.png");
         g2d.drawImage(money, -75, 0, 460, 180, null);
 
-        Image retButton = Main.loadImage("Button1.png");
-        g2d.drawImage(retButton ,15,500,160, 50, null);
-        /*retButton.addMouseListener(new MouseAdapter()
-        {
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                //statement
-            }
-        });
-*/
         ArrayList<Drawable> drawables = state.getDrawables();
         for (Drawable drawable : drawables) {
             try {
@@ -110,8 +97,7 @@ class GameFrame extends JFrame {
 
         for (Selectable selectable : state.selectables) {
             try {
-                if (!selectable.isEmpty() && selectable.currentPlant.getStateToVisible() <= state.states)
-                    selectable.draw(g2d, state);
+                selectable.draw(g2d, state);
                 //g2d.drawRect(selectable.x,selectable.y,75,105);
             } catch (InterruptedException e) {
                 e.printStackTrace();

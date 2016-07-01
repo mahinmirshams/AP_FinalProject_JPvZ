@@ -58,8 +58,8 @@ class Sun extends Drawable {
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         gameState.money += 25;
     }
 }

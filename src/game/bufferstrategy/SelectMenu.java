@@ -92,22 +92,18 @@ public class SelectMenu {
 
         private BufferedImage background;
         private BufferedImage offImage;
-        private BufferedImage button2;
         private Ellipse2D offButton;
-        private Ellipse2D button2_1;
         private boolean mouseIn;
 
         public ImagePane() {
             setOpaque(false);
             try {
-                background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/SelectMenu.png"));
-                offImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/exitButton.png"));
-                button2 = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/returnToMainMenuButton.png"));
+                background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\SelectMenu.png"));
+                offImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            offButton = new Ellipse2D.Float(110, 300, 25, 25);
-            button2_1 = new Ellipse2D.Float(110, 400, 25, 25);
+            offButton = new Ellipse2D.Float(110, 400, 25, 25);
             MouseAdapter handler = new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -166,7 +162,6 @@ public class SelectMenu {
                 g2d.drawImage(background, x, y, this);
                 if (mouseIn && offImage != null) {
                     g2d.drawImage(offImage, (int) offButton.getX(), (int) offButton.getY(), this);
-                    g2d.drawImage(button2, (int) button2_1.getX(), (int) button2_1.getY(), this);
                 }
                 g2d.dispose();
             }

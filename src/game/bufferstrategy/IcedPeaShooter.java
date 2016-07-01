@@ -15,7 +15,7 @@ class IcedPeaShooter extends Plant {
     }
 
     IcedPeaShooter(int x, int y, GameState state) {
-        super(x, y, "Snow_Pea_(HD_size).png", 70, 100, state, 0, 100);
+        super(x, y, "Snow-Pea2.gif", 70, 70, state, 0, 100);
     }
 
     @Override

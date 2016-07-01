@@ -9,9 +9,9 @@ class Level {
     private int[] zombieEntrance = {
             250,150,350,50,450
     };
-    private HashMap<Integer, Zombie> zombiesToSpawn = new HashMap<Integer, Zombie>();
+    private HashMap<Integer, Zombie> generateZombies = new HashMap<Integer, Zombie>();
     private ArrayList<TimerTask> zombiesTimerTasks = new ArrayList<TimerTask>();
-    private Timer zombiesSpawnTimer = new Timer();
+    private Timer zombiesTimer = new Timer();
     GameState state;
 
     Level(GameState state) {
@@ -19,16 +19,16 @@ class Level {
     }
 
     void init() {
-        for (final Integer delay: zombiesToSpawn.keySet()) {
+        for (final Integer delay: generateZombies.keySet()) {
             TimerTask spawnTimerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    state.addDrawables(zombiesToSpawn.get(delay));
+                    state.addDrawables(generateZombies.get(delay));
                 }
             };
 
             zombiesTimerTasks.add(spawnTimerTask);
-            zombiesSpawnTimer.schedule(spawnTimerTask, delay + 15000 /* Level initial delay */);
+            zombiesTimer.schedule(spawnTimerTask, delay + 15000 /* Level initial delay */);
         }
     }
 
@@ -67,6 +67,9 @@ class Level {
             case 5:
                 state.currentLevel = new Level5(state);
                 break;
+            default:
+                state.gameOver = true;
+                return;
         }
         state.currentLevel.init();
     }
@@ -141,7 +144,7 @@ class Level {
     }
 
     void update() {
-        if (state.killedZombie >= zombiesToSpawn.size()) {
+        if (state.killedZombie >= generateZombies.size()) {
             levelCompleted();
         }
     }
@@ -150,8 +153,8 @@ class Level {
         for (TimerTask timerTask : zombiesTimerTasks) {
             timerTask.cancel();
         }
-        zombiesSpawnTimer.purge();
-        zombiesSpawnTimer.cancel();
+        zombiesTimer.purge();
+        zombiesTimer.cancel();
     }
 
     enum ZombieType {
@@ -163,13 +166,13 @@ class Level {
 
     void makeRandomZombiesOfType(ZombieType zombieType, int count, int grassRows) {
         final Random rand = new Random();
-        int accumulatedDelay = 0;
+        int Delays = 0;
 
         for (int i = 0; i < count; i++) {
             int randomDelay = rand.nextInt(5000);
             randomDelay += 5000;
 
-            accumulatedDelay += randomDelay;
+            Delays += randomDelay;
 
             Zombie zombie;
 
@@ -193,8 +196,14 @@ class Level {
                     continue;
             }
 
-            zombiesToSpawn.put(accumulatedDelay, zombie);
+            generateZombies.put(Delays, zombie);
         }
+    }
+
+    PlantsPicker setDefaultPicker(PlantsPicker plantsPicker) {
+        state.pointedPicker = plantsPicker;
+        plantsPicker.setPointing(true);
+        return plantsPicker;
     }
 
 }

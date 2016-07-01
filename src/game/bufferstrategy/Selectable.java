@@ -9,6 +9,7 @@ class Selectable {
     int x;
     int y;
     private boolean plantable = false;
+    private boolean isPointing;
 
     Plant currentPlant = null;
     GameState gameState;
@@ -23,10 +24,10 @@ class Selectable {
         return currentPlant == null;
     }
 
-    boolean plant(GameState gameState) {
+    boolean plant() {
         if (!plantable || !isEmpty())
             return false;
-        if (gameState.states >= gameState.selectedItem.getStateToVisible()) {
+        if (gameState.selectedItem != null && gameState.states >= gameState.selectedItem.getStateToVisible()) {
             currentPlant = gameState.selectedItem;
             currentPlant.setLocation(x, y);
             currentPlant.planted();
@@ -40,7 +41,21 @@ class Selectable {
     }
 
     void draw(Graphics2D g2d, GameState state) throws InterruptedException {
-        currentPlant.draw(g2d);
+        if (!isEmpty()) {
+            if (currentPlant.getStateToVisible() <= state.states)
+                currentPlant.draw(g2d);
+        }
+        else if (isPointing && !state.pointingToPicker) {
+            Stroke previousStroke = g2d.getStroke();
+            Paint previousPaint = g2d.getPaint();
+
+            g2d.setStroke(new BasicStroke(2));
+            g2d.setPaint(Color.red);
+            g2d.drawRect(x, y, 70, 100);
+
+            g2d.setStroke(previousStroke);
+            g2d.setPaint(previousPaint);
+        }
     }
 
     void dig() {
@@ -54,5 +69,13 @@ class Selectable {
     }
     void setUnPlantable() {
         plantable = false;
+    }
+
+    boolean isPlantable() {
+        return plantable;
+    }
+
+    void setPointing(boolean pointing) {
+        this.isPointing = pointing;
     }
 }

@@ -1,5 +1,8 @@
 package game.bufferstrategy;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by saeedehspg on 6/25/2016 AD.
  */
@@ -44,7 +47,6 @@ abstract class GameObject extends Drawable {
     void planted() {
 
     }
-
     GameObject getCollidedZombie() {
         for (Drawable drawable : gameState.getDrawables()) {
             if (drawable instanceof Zombie) {
@@ -77,7 +79,7 @@ abstract class GameObject extends Drawable {
                             (y > selectable.currentPlant.y && y < selectable.currentPlant.y + selectable.currentPlant.height) ||
                             (y + height > selectable.currentPlant.y && (y + height < selectable.currentPlant.height + selectable.currentPlant.y))
                     )
-            ) {
+                    ) {
                 return selectable.currentPlant;
             }
         }

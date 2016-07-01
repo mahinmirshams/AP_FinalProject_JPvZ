@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.awt.Cursor;
-import java.util.Iterator;
 
 /**
  * This class holds the state of the game and all of its elements.
@@ -19,6 +18,13 @@ import java.util.Iterator;
  * @author Seyed Mohammad Ghaffarian
  */
 public class GameState {
+
+    private enum Direction{
+        Up,
+        Down,
+        Left,
+        Right
+    }
 
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
@@ -32,8 +38,11 @@ public class GameState {
     Boolean gameOver = false;
     int level = 1;
     String massage = "";
-    int killedZombie =0;
+    int killedZombie = 0;
     Level currentLevel;
+    private Selectable pointedSelectable;
+    PlantsPicker pointedPicker;
+    boolean pointingToPicker = true;
 
 
     public GameState() {
@@ -48,9 +57,7 @@ public class GameState {
      * The method which updates the game state.
      */
     void update() {
-        Iterator<Drawable> drawableIterator = getDrawables().iterator();
-        while (drawableIterator.hasNext()) {
-            Drawable drawable = drawableIterator.next();
+        for (Drawable drawable : getDrawables()) {
             if (drawable instanceof GameObject) {
                 GameObject gameObject = (GameObject) drawable;
                 gameObject.update();
@@ -61,9 +68,7 @@ public class GameState {
             }
         }
 
-        Iterator<Selectable> selectableIterator = selectables.iterator();
-        while (selectableIterator.hasNext()) {
-            Selectable selectable = selectableIterator.next();
+        for (Selectable selectable : selectables) {
             if (!selectable.isEmpty()) {
                 GameObject gameObject = selectable.currentPlant;
                 gameObject.update();
@@ -76,15 +81,15 @@ public class GameState {
     }
 
 
-    public KeyListener getKeyListener() {
+    KeyListener getKeyListener() {
         return keyHandler;
     }
 
-    public MouseListener getMouseListener() {
+    MouseListener getMouseListener() {
         return mouseHandler;
     }
 
-    public MouseMotionListener getMouseMotionListener() {
+    MouseMotionListener getMouseMotionListener() {
         return mouseHandler;
     }
 
@@ -92,7 +97,7 @@ public class GameState {
     /**
      * The keyboard handler.
      */
-    class KeyHandler implements KeyListener {
+    private class KeyHandler implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
@@ -100,6 +105,48 @@ public class GameState {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_KP_RIGHT:
+                    moveSelector(Direction.Right);
+                    break;
+
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_KP_UP:
+                    moveSelector(Direction.Up);
+                    break;
+
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_KP_LEFT:
+                    moveSelector(Direction.Left);
+                    break;
+
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_KP_DOWN:
+                    moveSelector(Direction.Down);
+                    break;
+
+                case KeyEvent.VK_ENTER:
+                    if (pointingToPicker) {
+                        pointedPicker.onClick();
+                        pointingToPicker = false;
+                        if (pointedSelectable == null) {
+                            for (Selectable selectable : selectables) {
+                                if (selectable.isPlantable()) {
+                                    pointedSelectable = selectable;
+                                    pointedSelectable.setPointing(true);
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        if (pointedSelectable.isEmpty()) {
+                            pointedSelectable.plant();
+                            pointingToPicker = true;
+                        }
+                    }
+                    break;
+            }
         }
 
         @Override
@@ -108,10 +155,97 @@ public class GameState {
 
     }
 
+    private void moveSelector(Direction direction) {
+        if (pointingToPicker)
+            moveSelectorInPickers(direction);
+        else
+            moveSelectorInSelectables(direction);
+    }
+
+    private void moveSelectorInPickers(Direction direction) {
+        PlantsPicker previouslyPointedPicker = pointedPicker;
+        PlantsPicker currentlyPointingPicker = null;
+        int minimumDistance = Integer.MAX_VALUE;
+        for (Drawable drawable : getDrawables()) {
+            if (drawable instanceof PlantsPicker) {
+                if (
+                        (
+                                (direction == Direction.Down && drawable.y > previouslyPointedPicker.y) ||
+                                (direction == Direction.Up && drawable.y < previouslyPointedPicker.y)
+                        ) &&
+                        drawable.x == previouslyPointedPicker.x
+                ) {
+                    int distance = Math.abs(drawable.y - previouslyPointedPicker.y);
+                    if (distance < minimumDistance) {
+                        minimumDistance = distance;
+                        currentlyPointingPicker = (PlantsPicker) drawable;
+                    }
+                } else if (
+                        (
+                                (direction == Direction.Right && drawable.x > previouslyPointedPicker.x) ||
+                                (direction == Direction.Left && drawable.x < previouslyPointedPicker.x)
+                        ) &&
+                                drawable.y == previouslyPointedPicker.y
+                ) {
+                    int distance = Math.abs(drawable.x - previouslyPointedPicker.x);
+                    if (distance < minimumDistance) {
+                        minimumDistance = distance;
+                        currentlyPointingPicker = (PlantsPicker) drawable;
+                    }
+                }
+            }
+        }
+        if (currentlyPointingPicker != null) {
+            previouslyPointedPicker.setPointing(false);
+            currentlyPointingPicker.setPointing(true);
+            pointedPicker = currentlyPointingPicker;
+        }
+    }
+
+    private void moveSelectorInSelectables(Direction direction) {
+        Selectable previouslyPointedSelectable = pointedSelectable;
+        Selectable currentlyPointingSelectable = null;
+        int minimumDistance = Integer.MAX_VALUE;
+        for (Selectable selectable : selectables) {
+            if (selectable.isPlantable() && selectable.isEmpty()) {
+                if (
+                        (
+                                (direction == Direction.Down && selectable.y > previouslyPointedSelectable.y) ||
+                                (direction == Direction.Up && selectable.y < previouslyPointedSelectable.y)
+                        ) &&
+                        selectable.x == previouslyPointedSelectable.x
+                ) {
+                    int distance = Math.abs(selectable.y - previouslyPointedSelectable.y);
+                    if (distance < minimumDistance) {
+                        minimumDistance = distance;
+                        currentlyPointingSelectable = selectable;
+                    }
+                } else if (
+                        (
+                                (direction == Direction.Right && selectable.x > previouslyPointedSelectable.x) ||
+                                (direction == Direction.Left && selectable.x < previouslyPointedSelectable.x)
+                        ) &&
+                                selectable.y == previouslyPointedSelectable.y
+                ) {
+                    int distance = Math.abs(selectable.x - previouslyPointedSelectable.x);
+                    if (distance < minimumDistance) {
+                        minimumDistance = distance;
+                        currentlyPointingSelectable = selectable;
+                    }
+                }
+            }
+        }
+        if (currentlyPointingSelectable != null) {
+            previouslyPointedSelectable.setPointing(false);
+            currentlyPointingSelectable.setPointing(true);
+            pointedSelectable = currentlyPointingSelectable;
+        }
+    }
+
     /**
      * The mouse handler.
      */
-    class MouseHandler implements MouseListener, MouseMotionListener {
+    private class MouseHandler implements MouseListener, MouseMotionListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
