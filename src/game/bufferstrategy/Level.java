@@ -170,7 +170,7 @@ class Level {
 
         for (int i = 0; i < count; i++) {
             int randomDelay = rand.nextInt(5000);
-            randomDelay += 5000;
+            randomDelay += 8000;
 
             Delays += randomDelay;
 

@@ -112,12 +112,12 @@ public class MainMenu {
             public ImagePane() {
                 setOpaque(false);
                 try {
-                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
+                    background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/MainMenu.png"));
 
-                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    startImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
-                    guideImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\none.png"));
+                    exitImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
+                    continueImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
+                    startImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
+                    guideImg = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/none.png"));
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
