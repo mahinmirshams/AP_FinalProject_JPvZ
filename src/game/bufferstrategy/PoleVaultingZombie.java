@@ -6,7 +6,7 @@ package game.bufferstrategy;
 public class PoleVaultingZombie extends Zombie{
     public PoleVaultingZombie(int x, int y, GameState state) {
 
-        super(x, y, state, "HD_Polevaulterzombie.png" , "HD_Polevaulterzombie.png");
+        super(x, y, state, "HD_Polevaulterzombie 2.png" , "HD_PolevaulterzombieIcy.png");
     }
 
 

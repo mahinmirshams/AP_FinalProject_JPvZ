@@ -47,8 +47,7 @@ public class Main {
         Sound sound = new Sound();
         //Timer soundTimer = new Timer();
         //soundTimer.schedule(sound, 0L, 16000L);
-        //Menu menu = new Menu( );
-        MainMenu mainMenu = new MainMenu("hi");
+        MainMenu mainMenu = new MainMenu();
         SelectMenu selectMenu = new SelectMenu();
     }
 
