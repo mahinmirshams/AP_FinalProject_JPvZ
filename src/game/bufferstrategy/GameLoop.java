@@ -57,10 +57,12 @@ class GameLoop implements Runnable {
                 Selectable clickedSelectable = getClickedSelectable(e.getX(), e.getY());
 
                 if (clickedSelectable != null && state.selectedItem != null) {
-                    if (clickedSelectable.isEmpty())
-                        clickedSelectable.plant();
-                    if (state.digISOn == true)
+                    if (state.digISOn == true) {
                         clickedSelectable.dig();
+                        state.digISOn = false;
+                        state.cursor = null;
+                    } else if (clickedSelectable.isEmpty())
+                        clickedSelectable.plant();
                 }
                 if (clickedItem != null) {
                     clickedItem.onClick();

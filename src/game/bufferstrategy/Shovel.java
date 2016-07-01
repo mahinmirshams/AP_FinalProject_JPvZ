@@ -18,9 +18,9 @@ public class Shovel extends PlantsPicker {
     @Override
         void onClick() {
             super.onClick();
-            if (gameState.money >= getValue()){
+
                gameState.digISOn = true;
-        }
+
 
     }
 }

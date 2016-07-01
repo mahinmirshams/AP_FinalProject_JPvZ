@@ -92,7 +92,7 @@ class GameFrame extends JFrame {
         g2d.drawImage(money, -75, -50, 460, 180, null);
 
         state.addDrawables(new MenuButton(10 ,500 , "Button1.png"  , 150 , 40  , state));
-        state.addDrawables(new Shovel(70, 500, state));
+        state.addDrawables(new Shovel(120, 500, state));
 
 
         ArrayList<Drawable> drawables = state.getDrawables();
