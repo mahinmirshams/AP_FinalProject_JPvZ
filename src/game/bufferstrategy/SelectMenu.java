@@ -14,6 +14,7 @@ import static com.sun.awt.AWTUtilities.setWindowOpaque;
  * Created by mahin mirshams on 7/1/2016.
  */
 class SelectMenu  {
+    MainMenu test  ;
     GameState state;
     private JFrame frame ;
 
@@ -105,7 +106,9 @@ class SelectMenu  {
                     }
                     if (return2MenuButton.contains(e.getPoint())) {
                         cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                        test = new MainMenu("");
 
+                        test.mainframe.dispose();
                         frame.dispose();
                         new MainMenu();
 

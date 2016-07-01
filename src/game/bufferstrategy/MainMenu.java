@@ -16,8 +16,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class MainMenu {
 
-        GameState state;
-        private JFrame frame ;
+
+    static  GameFrame mainframe ;
+    GameState state;
+    private JFrame frame ;
+
+    MainMenu(String s){
+
+     }
 
         MainMenu() {
             EventQueue.invokeLater(new Runnable() {
@@ -116,13 +122,14 @@ public class MainMenu {
                             EventQueue.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    GameFrame frame = new GameFrame("Java Plants vs Zombies");
-                                    frame.setLocationRelativeTo(null); // put frame at center of screen
-                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                                    frame.setVisible(true);
-                                    frame.initBufferStrategy();
+                                    mainframe = new GameFrame("Java Plants vs Zombies");
+                                    mainframe.setLocationRelativeTo(null); // put frame at center of screen
+                                    mainframe.setUndecorated(true);
+                                    mainframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                                    mainframe.setVisible(true);
+                                    mainframe.initBufferStrategy();
                                     // Create and execute the game-loop
-                                    GameLoop game = new GameLoop(frame);
+                                    GameLoop game = new GameLoop(mainframe);
                                     game.init();
                                     ThreadPool.execute(game);
                                     // and the game starts ...

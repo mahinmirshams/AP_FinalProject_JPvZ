@@ -18,11 +18,19 @@ class LawnMover extends GameObject {
         super(x, y, "Lawn_Mower.png", 100, 80, state, 0, 700000000);
     }
 
+    /**
+     * overriden method of the Drawable class which draws the LawnMover Graphically
+     * @param g2d
+     * @throws InterruptedException
+     */
     @Override
     public void draw(Graphics2D g2d) throws InterruptedException {
         super.draw(g2d);
     }
 
+    /**
+     * overriden method of the GameObject class which detects the collision  of lawnMover and zombie
+     */
     @Override
     void update() {
         super.update();
