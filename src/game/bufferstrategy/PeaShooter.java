@@ -33,8 +33,13 @@ class PeaShooter extends Plant {
 
             @Override
             public void run() {
-                Pea icedPea = new Pea(me, gameState);
-                gameState.addDrawables((icedPea));
+                for (Drawable drawable : gameState.getDrawables()) {
+                    if (drawable.y == me.y && drawable instanceof Zombie) {
+                        Pea pea = new Pea(me, gameState);
+                        gameState.addDrawables((pea));
+                    }
+                }
+
             }
 
         };

@@ -49,11 +49,7 @@ public class MainMenu {
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
 
-                    try {
-                        frame.setIconImage(ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\zombieHead.png")));
-                    } catch (IOException exc) {
-                        exc.printStackTrace();
-                    }
+                    frame.setIconImage(Main.loadImage("zombieHead.png"));
                 }
             });
         }

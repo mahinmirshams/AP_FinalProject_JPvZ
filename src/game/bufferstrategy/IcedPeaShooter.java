@@ -31,8 +31,13 @@ class IcedPeaShooter extends Plant {
         TimerTask Task = new TimerTask() {
             @Override
             public void run() {
-                IcedPea icedPea = new IcedPea(me, gameState);
-                gameState.addDrawables((icedPea));
+                for (Drawable drawable : gameState.getDrawables()) {
+                    if (drawable.y == me.y && drawable instanceof Zombie)  {
+                        IcedPea icedPea = new IcedPea(me, gameState);
+                        gameState.addDrawables((icedPea));
+                    }
+                }
+
             }
 
         };

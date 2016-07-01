@@ -8,19 +8,10 @@ public class Shovel extends PlantsPicker {
         super(x, y, "dig.png", "dig.png", state);
     }
 
-
-
     @Override
-    int getValue() {
-        return 0;
+    void onClick() {
+        super.onClick();
+        gameState.digISOn = true;
     }
 
-    @Override
-        void onClick() {
-            super.onClick();
-
-               gameState.digISOn = true;
-
-
-    }
 }
