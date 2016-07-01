@@ -21,4 +21,14 @@ class BasketBall extends GameObject {
         if (x > shootEnd)
             y = (int) (originY + (0.005 * (x-shootStart) * (x-shootEnd)));
     }
+    @Override
+    void update() {
+        super.update();
+
+        GameObject collidedPlant = getCollidedPlant();
+        if (collidedPlant != null) {
+            collidedPlant.hurt(5);
+            life = 0;
+        }
+    }
 }
