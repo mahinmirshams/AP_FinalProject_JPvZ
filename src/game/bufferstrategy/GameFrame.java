@@ -83,7 +83,7 @@ class GameFrame extends JFrame {
         g2d.drawImage(bg, 0, 0, 678 * 2, GAME_HEIGHT, null);
 
         Image money = Main.loadImage("plantPanel.png");
-        g2d.drawImage(money, -75, 0, 460, 180, null);
+        g2d.drawImage(money, -75, -50, 460, 180, null);
 
         state.addDrawables(new MenuButton(10 ,500 , "Button1.png"  , 150 , 40  , state));
 
@@ -107,7 +107,7 @@ class GameFrame extends JFrame {
         }
 
         g2d.setFont(getFont().deriveFont(15.0f));
-        g2d.drawString(String.valueOf(state.money), 20, 117);
+        g2d.drawString(String.valueOf(state.money), 23, 67);
 
 
         g2d.setFont(getFont().deriveFont(70.0f));
