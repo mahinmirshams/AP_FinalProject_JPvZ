@@ -31,16 +31,11 @@ class IcedPea extends GameObject {
         super.update();
         GameObject gameObject = getCollidedZombie();
         if (gameObject != null && gameObject instanceof Zombie) {
-            if(!(gameObject instanceof PoleVaultingZombie)) {
+
                 ((Zombie) gameObject).getIcy();
                 gameObject.hurt(25);
                 life = 0;
 
-            } else if (gameObject instanceof PoleVaultingZombie && ((PoleVaultingZombie) gameObject).hasJumped==true) {
-                ((Zombie) gameObject).getIcy();
-                gameObject.hurt(25);
-                life = 0;
-            }
         }
     }
 }
