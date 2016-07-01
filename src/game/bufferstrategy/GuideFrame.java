@@ -1,7 +1,5 @@
 package game.bufferstrategy;
 
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +11,15 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 /**
  * Created by mahin mirshams on 7/1/2016.
  */
-public class MainMenu {
+public class GuideFrame  {
 
         GameState state;
         JFrame frame ;
 
-        public MainMenu() {
+        public GuideFrame() {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -94,39 +90,20 @@ public class MainMenu {
         public class ImagePane extends JPanel {
 
             private BufferedImage background;
-
             private BufferedImage exitImage;
-            private BufferedImage continueImg;
-            private BufferedImage startImg;
-            private BufferedImage guideImg;
-
             private Ellipse2D exitButton;
-            private Ellipse2D continueButton;
-            private Ellipse2D startButton;
-            private Ellipse2D guideButton;
 
-
-
-            private boolean mouseIn = false;
+            private boolean mouseIn ;
 
             public ImagePane() {
                 setOpaque(false);
                 try {
-                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\MainMenu.png"));
-                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
-                    continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\returnToMainMenuButton.png"));
-                    startImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\startFromThePreLevel.png"));
-                    guideImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\arrow.png"));
-
-                } catch (IOException ex) {
+                    background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\Guide.png"));
+                    exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\arrow.png"));
+                   } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                exitButton = new Ellipse2D.Float(10, 510, 200, 44);
-                startButton = new Ellipse2D.Float(110, 315, 200, 44);
-                continueButton = new Ellipse2D.Float(110, 265, 200, 44);
-                guideButton = new Ellipse2D.Float(110, 365, 200, 44);
-
-
+                exitButton = new Ellipse2D.Float(380, 420, 200, 44);
 
                 MouseAdapter handler = new MouseAdapter() {
 
@@ -137,44 +114,7 @@ public class MainMenu {
                         Cursor cursor = Cursor.getDefaultCursor();
                         if (exitButton.contains(e.getPoint())) {
                             cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            System.exit(1);
-                        }
-
-
-                        if (guideButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                            GuideFrame guideFrame = new GuideFrame();
-                        }
-
-                        if (startButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
                             frame.dispose();
-                            // After the player clicks 'PLAY' ...
-                            EventQueue.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    GameFrame frame = new GameFrame("Java Plants vs Zombies");
-                                    frame.setLocationRelativeTo(null); // put frame at center of screen
-                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                                    frame.setVisible(true);
-                                    frame.initBufferStrategy();
-                                    // Create and execute the game-loop
-                                    GameLoop game = new GameLoop(frame);
-                                    game.init();
-                                    ThreadPool.execute(game);
-                                    // and the game starts ...
-                                }
-                            });
-
-
-                        }
-                        if (continueButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-
-                            frame.dispose();
-                            MainMenu mainMenu = new MainMenu();
-
-
                         }
                         setCursor(cursor);
 
@@ -184,17 +124,6 @@ public class MainMenu {
                     public void mouseMoved(MouseEvent e) {
                         Cursor cursor = Cursor.getDefaultCursor();
                         if (exitButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                        }
-                        if (startButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-
-
-                        }
-                        if (guideButton.contains(e.getPoint())) {
-                            cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-                        }
-                        if (continueButton.contains(e.getPoint())) {//TODO select the level to start from
                             cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
                         }
                         setCursor(cursor);
@@ -231,15 +160,16 @@ public class MainMenu {
                     int y = (getHeight() - background.getHeight()) / 2;
                     g2d.drawImage(background, x, y, this);
                     if (mouseIn && exitImage != null) {
-
                         g2d.drawImage(exitImage, (int) exitButton.getX(), (int) exitButton.getY(), this);
-                        g2d.drawImage(continueImg, (int) continueButton.getX(), (int)continueButton.getY(), this);
-                        g2d.drawImage(startImg, (int) startButton.getX(), (int) startButton.getY(), this);
-                        g2d.drawImage(guideImg, (int) guideButton.getX(), (int) guideButton.getY(), this);
 
                     }
+
+
+
                     g2d.dispose();
                 }
             }
         }
     }
+
+

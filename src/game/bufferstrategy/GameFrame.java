@@ -87,8 +87,6 @@ class GameFrame extends JFrame {
         Image money = Main.loadImage("plantPanel.png");
         g2d.drawImage(money, -75, 0, 460, 180, null);
 
-        Image retButton = Main.loadImage("Button1.png");
-        g2d.drawImage(retButton ,15,500,160, 50, null);
         /*retButton.addMouseListener(new MouseAdapter()
         {
             @Override

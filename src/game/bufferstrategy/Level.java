@@ -29,6 +29,7 @@ class Level {
 
             zombiesTimerTasks.add(spawnTimerTask);
             zombiesSpawnTimer.schedule(spawnTimerTask, delay + 15000 /* Level initial delay */);
+            state.addDrawables(new MenuButton(20  , 500,"Button1.png" , 150 , 40  , state));
         }
     }
 

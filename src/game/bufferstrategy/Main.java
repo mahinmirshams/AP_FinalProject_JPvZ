@@ -25,30 +25,11 @@ public class Main {
         // Initialize the global thread-pool
         ThreadPool.init();
 
-        // Show the game menu ...
-
-        // After the player clicks 'PLAY' ...
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GameFrame frame = new GameFrame("Java Plants vs Zombies");
-                frame.setLocationRelativeTo(null); // put frame at center of screen
-                frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame.setVisible(true);
-                frame.initBufferStrategy();
-                // Create and execute the game-loop
-                GameLoop game = new GameLoop(frame);
-                game.init();
-                ThreadPool.execute(game);
-                // and the game starts ...
-            }
-        });
 
         Sound sound = new Sound();
         //Timer soundTimer = new Timer();
         //soundTimer.schedule(sound, 0L, 16000L);
         MainMenu mainMenu = new MainMenu();
-        SelectMenu selectMenu = new SelectMenu();
     }
 
     static Image loadImage(String filename) {
