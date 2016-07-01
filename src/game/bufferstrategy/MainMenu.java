@@ -27,8 +27,7 @@ public class MainMenu extends JFrame {
     private ImageIcon img ;
 
 
-    private static final long serialVersionUID = 1L;
-    MyButton b1, b2, b3, b4;
+
 
     public MainMenu(String title ){
 
@@ -47,20 +46,7 @@ public class MainMenu extends JFrame {
         label.setSize(1000 , 1000 );
         add(label) ;
 
-	/*	b1 = new MyButton("play1");
-		b1.setSize(300, 50);
-		b1.setLocation(160, 250);
-		b1.setBackground(new Color(56, 9, 1));
-		b1.setForeground(new Color(221, 188, 182));
-	*/
         setVisible(true);
-
-/*
-        JLabel background = new JLabel(new ImageIcon(ImageIO.read(...)));
-        frame.setContentPane(background);
-        frame.setLayout(...);
-        frame.add(...);
-*/
 
 /*
 
