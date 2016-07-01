@@ -13,7 +13,8 @@ class Level2 extends Level {
     void init() {
         int grassRows = 3;
 
-        makeRandomZombiesOfType(ZombieType.Regular, 10, grassRows);
+        int Delays = 0;
+        makeRandomZombiesOfType(ZombieType.Regular, 10, grassRows, Delays);
 
         super.init();
 

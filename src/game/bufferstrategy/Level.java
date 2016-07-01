@@ -164,9 +164,8 @@ class Level {
         CatapultBasketBall
     }
 
-    void makeRandomZombiesOfType(ZombieType zombieType, int count, int grassRows) {
+    int makeRandomZombiesOfType(ZombieType zombieType, int count, int grassRows, int Delays) {
         final Random rand = new Random();
-        int Delays = 0;
 
         for (int i = 0; i < count; i++) {
             int randomDelay = rand.nextInt(5000);
@@ -198,6 +197,8 @@ class Level {
 
             generateZombies.put(Delays, zombie);
         }
+
+        return Delays;
     }
 
     PlantsPicker setDefaultPicker(PlantsPicker plantsPicker) {

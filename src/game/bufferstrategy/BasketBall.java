@@ -20,6 +20,9 @@ class BasketBall extends GameObject {
         super.move();
         if (x > shootEnd)
             y = (int) (originY + (0.005 * (x-shootStart) * (x-shootEnd)));
+        else if (x < shootEnd - 5) {
+            life = 0;
+        }
     }
     @Override
     void update() {

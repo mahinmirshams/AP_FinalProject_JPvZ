@@ -6,11 +6,12 @@ import java.util.TimerTask;
 /**
  * Created by mahin mirshams on 6/28/2016.
  */
-public class CatapultBasketBallZombie extends Zombie {
+class CatapultBasketBallZombie extends Zombie {
 
 
     ZombieState state = ZombieState.Walking;
     private int basketball;
+    Timer timer = new Timer();
 
 
     CatapultBasketBallZombie(int x, int y, GameState gameState) {
@@ -24,17 +25,21 @@ public class CatapultBasketBallZombie extends Zombie {
     }
 
     @Override
+    void deleteObject() {
+        super.deleteObject();
+        timer.cancel();
+    }
+
+    @Override
     void update() {
         super.update();
         if (state == ZombieState.Walking) {
 
             move();
-
-
-            if (x == 800) {
+            
+            if (x >= 800 && x <= 810) {
                 setState(ZombieState.Shooting);
                 final CatapultBasketBallZombie me = this;
-                Timer ball = new Timer();
                 TimerTask ballTask = new TimerTask() {
                     @Override
                     public void run() {
@@ -48,13 +53,14 @@ public class CatapultBasketBallZombie extends Zombie {
                             if (selectable.y == me.y && !selectable.isEmpty()) {
                                 gameState.addDrawables(new BasketBall(me, gameState, y, x, selectable.x));
                                 basketball++;
+                                return;
                             }
-
                         }
+                        setState(ZombieState.Walking);
                     }
                 };
 
-                ball.schedule(ballTask, 0, 1000);
+                timer.schedule(ballTask, 0, 1000);
             }
         }
     }
