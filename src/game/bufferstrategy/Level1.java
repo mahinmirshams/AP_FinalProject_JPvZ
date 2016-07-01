@@ -19,7 +19,7 @@ class Level1 extends Level {
 
         drawGrasses(grassRows);
 
-        state.addDrawables(new PeaShooterPicker(65, 57, state));
+        state.addDrawables(setDefaultPicker(new PeaShooterPicker(65, 57, state)));
         state.addDrawables(new SunFlowerPicker(130, 57, state));
     }
 }

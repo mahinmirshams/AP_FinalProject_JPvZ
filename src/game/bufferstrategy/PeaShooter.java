@@ -15,7 +15,7 @@ class PeaShooter extends Plant {
     }
 
     PeaShooter(int x, int y, GameState state) {
-        super(x, y, "Peashooter_HD.png", 70, 100, state, 0, 100);
+        super(x, y, "Peashooter3.gif", 100, 100, state, 0, 100);
 
     }
 

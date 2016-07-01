@@ -6,7 +6,7 @@ package game.bufferstrategy;
 class WalNutPicker extends PlantsPicker {
 
     WalNutPicker(int x, int y, GameState state) {
-        super(x, y, "WalNutPicker.jpg", "WalNut.png", state);
+        super(x, y, "walnutpicker.png", "WalNut.png", state);
     }
 
     @Override
@@ -15,8 +15,8 @@ class WalNutPicker extends PlantsPicker {
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         if (gameState.money >= getValue())
             gameState.selectedItem = new WalNut(0, 0, gameState);
     }

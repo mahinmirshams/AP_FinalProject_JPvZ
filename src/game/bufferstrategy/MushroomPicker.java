@@ -14,8 +14,8 @@ public class MushroomPicker extends PlantsPicker {
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         if (gameState.money >= getValue())
             gameState.selectedItem = new Mushroom(0, 0, gameState);
     }

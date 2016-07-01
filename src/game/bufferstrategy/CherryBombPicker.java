@@ -6,17 +6,17 @@ package game.bufferstrategy;
 class CherryBombPicker extends PlantsPicker {
 
     CherryBombPicker(int x, int y, GameState state) {
-        super(x, y, "CherryBombPicker.jpg", "CherryBomb.png", state);
+        super(x, y, "CherryBombPicker.png", "CherryBomb.png", state);
     }
 
     @Override
     int getValue() {
-        return 0;
+        return 150;
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         if (gameState.money >= getValue())
             gameState.selectedItem = new CherryBomb(0, 0, gameState);
     }

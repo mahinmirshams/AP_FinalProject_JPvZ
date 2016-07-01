@@ -31,7 +31,7 @@ public class Drawable {
         g2d.drawImage(img, x, y, width, height, null);
     }
 
-    void onClick(GameState gameState) {
+    void onClick() {
     }
 
     void setLocation(int x, int y) {

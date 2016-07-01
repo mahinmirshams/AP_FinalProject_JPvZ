@@ -58,10 +58,10 @@ class GameLoop implements Runnable {
 
                 if (clickedSelectable != null && state.selectedItem != null) {
                     if (clickedSelectable.isEmpty())
-                        clickedSelectable.plant(state);
+                        clickedSelectable.plant();
                 }
                 if (clickedItem != null) {
-                    clickedItem.onClick(state);
+                    clickedItem.onClick();
                     if (clickedItem instanceof Sun) state.deleteDrawable(clickedItem);
                 }
             }
@@ -87,12 +87,9 @@ class GameLoop implements Runnable {
             }
         });
 
-
-
         for (int j = 0; j < 5; j++)
             for (int i = 0; i < 9; i++)
                 state.selectables.add(new Selectable(395 + (i * 75), 40 + (j * 105), state));
-
 
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -163,25 +160,6 @@ class GameLoop implements Runnable {
             } catch (InterruptedException ignored) {
             }
         }
-    }
-
-    void update(){
-        init();
-
-       if(state.level>=2)
-           state.addDrawables(new IcedPeaShooterPicker(195, 57, state));
-
-
-
-       if(state.level>=5)
-            state.addDrawables(new CherryBombPicker(325, 57, state));
-
-
-      //  if (state.level>=3) grassRows = 5;
-
-
-
-
     }
 }
 

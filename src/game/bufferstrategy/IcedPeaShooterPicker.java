@@ -6,7 +6,7 @@ package game.bufferstrategy;
 class IcedPeaShooterPicker extends PlantsPicker {
 
     IcedPeaShooterPicker(int x, int y, GameState state) {
-        super(x, y, "IcedPeaShooterPicker.jpg", "Snow_Pea_(HD_size).png", state);
+        super(x, y, "Icedpeashooter2.png", "Snow_Pea_(HD_size).png", state);
     }
 
     @Override
@@ -15,8 +15,8 @@ class IcedPeaShooterPicker extends PlantsPicker {
     }
 
     @Override
-    void onClick(GameState gameState) {
-        super.onClick(gameState);
+    void onClick() {
+        super.onClick();
         if (gameState.money >= getValue())
             gameState.selectedItem = new IcedPeaShooter(0, 0, gameState);
     }
