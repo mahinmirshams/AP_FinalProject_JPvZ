@@ -15,7 +15,7 @@ public class Mushroom extends Plant {
     }
 
     Mushroom(int x, int y, GameState state) {
-        super(x, y, "mushroom.png", 70, 100, state, 0, 100);
+        super(x, y, "mushroom.png", 70, 70, state, 0, 100);
 
     }
 
