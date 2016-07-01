@@ -11,6 +11,6 @@ class WalNut extends Plant {
     }
 
     WalNut(int x, int y, GameState state) {
-        super(x, y, "WalNut.png", 70, 100, state, 0, 300);
+        super(x, y, "WalNut.png", 70, 70, state, 0, 300);
     }
 }

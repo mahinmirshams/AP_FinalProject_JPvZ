@@ -1,8 +1,6 @@
 package game.bufferstrategy;
 
-/**
- * Created by saeedehspg on 6/23/2016 AD.
- */
+
 class SunFlowerPicker extends PlantsPicker {
 
     SunFlowerPicker(int x, int y, GameState state) {
