@@ -85,6 +85,8 @@ class GameFrame extends JFrame {
         Image money = Main.loadImage("plantPanel.png");
         g2d.drawImage(money, -75, 0, 460, 180, null);
 
+        state.addDrawables(new MenuButton(10 ,500 , "Button1.png"  , 150 , 40  , state));
+
         ArrayList<Drawable> drawables = state.getDrawables();
         for (Drawable drawable : drawables) {
             try {

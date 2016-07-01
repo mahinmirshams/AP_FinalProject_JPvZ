@@ -16,7 +16,9 @@ import java.lang.reflect.Method;
 /**
  * Created by mahin mirshams on 7/1/2016.
  */
-public class SelectMenu {
+public class SelectMenu  {
+    GameState state;
+    JFrame frame ;
 
     public SelectMenu() {
         EventQueue.invokeLater(new Runnable() {
@@ -26,15 +28,13 @@ public class SelectMenu {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ex) {
                 }
-
-                JFrame frame = new JFrame("SelectMenu");
+                frame = new JFrame("SelectMenu");
                 frame.setUndecorated(true);
                 frame.setContentPane(new ContentPane());
 
-                    if (supportsPerAlphaPixel()) {
-                        setOpaque(frame, false);
+                if (supportsPerAlphaPixel()) {
+                    setOpaque(frame, false);
                 }
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new BorderLayout());
                 frame.add(new ImagePane());
                 frame.pack();
@@ -85,47 +85,84 @@ public class SelectMenu {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-           }
+        }
     }
 
     public class ImagePane extends JPanel {
 
         private BufferedImage background;
-        private BufferedImage offImage;
-        private Ellipse2D offButton;
-        private boolean mouseIn;
+        private BufferedImage exitImage;
+        private BufferedImage return2MenuImg;
+        private BufferedImage continueImg;
+        private Ellipse2D exitButton;
+        private Ellipse2D return2MenuButton;
+        private Ellipse2D continueButton;
+
+        private Ellipse2D exitButton2;
+        private Ellipse2D return2MenuButton2;
+        private Ellipse2D continueButton2;
+
+        private boolean mouseIn = false;
 
         public ImagePane() {
             setOpaque(false);
             try {
-                background = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/SelectMenu.png"));
-                offImage = ImageIO.read(new File("/Users/Applestore/IdeaProjects/AP_FinalProject_JPvZ/src/images/IcedIcedpeachooter2.pngexitButton.png"));
+                background = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\SelectMenu.png"));
+                exitImage = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\exitButton.png"));
+                return2MenuImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\returnToMainMenuButton.png"));
+                continueImg = ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\button2.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            offButton = new Ellipse2D.Float(110, 400, 25, 25);
+            exitButton = new Ellipse2D.Float(110, 410, 200, 44);
+            continueButton = new Ellipse2D.Float(110, 315, 200, 44);
+            return2MenuButton = new Ellipse2D.Float(110, 265, 200, 44);
+
+
+            exitButton2 = new Ellipse2D.Float(110, 405, 200, 44);
+            continueButton2 = new Ellipse2D.Float(110, 310, 200, 44);
+            return2MenuButton2 = new Ellipse2D.Float(110, 260, 200, 44);
+
             MouseAdapter handler = new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                /*    if (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON1) {
-                        if (offButton.contains(e.getPoint())) {
-                            Window window = SwingUtilities.getWindowAncestor(ImagePane.this);
-                            if (window != null) {
-                                window.dispose();
-                            }
-                        }
-                    }
-                */}
+
 
                 @Override
-                public void mousePressed(MouseEvent mouseEvent) {
-                    System.exit(1);
+                public void mousePressed(MouseEvent e) {
+
+                    Cursor cursor = Cursor.getDefaultCursor();
+                    if (exitButton.contains(e.getPoint())) {
+                        cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                        System.exit(1);
+                    }
+                    if (continueButton.contains(e.getPoint())) {//TODO : select the level and start from that
+                        cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                        // GuideFrame guideFrame = new GuideFrame();
+                        frame.dispose();
+
+
+                    }
+                    if (return2MenuButton.contains(e.getPoint())) {
+                        cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+
+                        frame.dispose();
+                        MainMenu mainMenu = new MainMenu();
+
+
+                    }
+                    setCursor(cursor);
+
                 }
 
                 @Override
                 public void mouseMoved(MouseEvent e) {
                     Cursor cursor = Cursor.getDefaultCursor();
-                    if (offButton.contains(e.getPoint())) {
+                    if (exitButton2.contains(e.getPoint())) {
+                        cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                    }
+                    if (continueButton2.contains(e.getPoint())) {
+                        cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+                    }
+                    if (return2MenuButton2.contains(e.getPoint())) {
                         cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
                     }
                     setCursor(cursor);
@@ -142,6 +179,7 @@ public class SelectMenu {
                     mouseIn = false;
                     repaint();
                 }
+
             };
             addMouseListener(handler);
             addMouseMotionListener(handler);
@@ -160,8 +198,19 @@ public class SelectMenu {
                 int x = (getWidth() - background.getWidth()) / 2;
                 int y = (getHeight() - background.getHeight()) / 2;
                 g2d.drawImage(background, x, y, this);
-                if (mouseIn && offImage != null) {
-                    g2d.drawImage(offImage, (int) offButton.getX(), (int) offButton.getY(), this);
+                if (mouseIn && exitImage != null) {
+                    g2d.drawImage(exitImage, (int) exitButton2.getX(), (int) exitButton2.getY(), this);
+                    g2d.drawImage(return2MenuImg, (int) return2MenuButton2.getX(), (int)return2MenuButton2.getY(), this);
+                    g2d.drawImage(continueImg, (int) continueButton2.getX(), (int) continueButton2.getY(), this);
+
+                }
+
+                if(!mouseIn){
+
+                    g2d.drawImage(exitImage, (int) exitButton.getX(), (int) exitButton.getY(), this);
+                    g2d.drawImage(return2MenuImg, (int) return2MenuButton.getX(), (int)return2MenuButton.getY(), this);
+                    g2d.drawImage(continueImg, (int) continueButton.getX(), (int) continueButton.getY(), this);
+
                 }
                 g2d.dispose();
             }
