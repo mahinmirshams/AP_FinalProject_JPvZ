@@ -160,6 +160,7 @@ public class MainMenu {
                                 public void run() {
                                     mainframe = new GameFrame("Java Plants vs Zombies");
                                     mainframe.setLocationRelativeTo(null); // put frame at center of screen
+                                    mainframe.setUndecorated(true);
                                     mainframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
                                     mainframe.setVisible(true);
                                     mainframe.initBufferStrategy();

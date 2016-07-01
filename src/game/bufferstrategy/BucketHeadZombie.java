@@ -12,6 +12,6 @@ public class BucketHeadZombie extends Zombie{
     }
 
     BucketHeadZombie(int x, int y, GameState state) {
-        super(x, y, state, "conehead.gif", "BucketHeadZombieIcy.png");  //TODO : fix the icy
+        super(x, y, state, "conehead.gif", "coneheadicy.png");  //TODO : fix the icy
     }
 }
