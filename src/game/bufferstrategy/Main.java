@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -27,9 +29,9 @@ public class Main {
 
 
         Sound sound = new Sound();
-        //Timer soundTimer = new Timer();
-        //soundTimer.schedule(sound, 0L, 16000L);
-        //Menu menu = new Menu( );
+        Timer soundTimer = new Timer();
+        soundTimer.schedule(sound, 0L, 16000L);
+        Menu menu = new Menu( );
         MainMenu mainMenu = new MainMenu();
     }
 

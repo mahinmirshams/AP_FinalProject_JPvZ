@@ -7,7 +7,7 @@ import java.util.*;
  */
 class Level {
     private int[] zombieEntrance = {
-            250,150,350,50,450
+            240,140,340,40,440
     };
     private HashMap<Integer, Zombie> generateZombies = new HashMap<Integer, Zombie>();
     private ArrayList<TimerTask> zombiesTimerTasks = new ArrayList<TimerTask>();
