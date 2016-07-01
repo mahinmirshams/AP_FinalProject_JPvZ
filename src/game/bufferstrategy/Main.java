@@ -49,6 +49,7 @@ public class Main {
         //soundTimer.schedule(sound, 0L, 16000L);
         //Menu menu = new Menu( );
         MainMenu mainMenu = new MainMenu("hi");
+        SelectMenu selectMenu = new SelectMenu();
     }
 
     static Image loadImage(String filename) {
