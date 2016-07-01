@@ -1,11 +1,14 @@
 package game.bufferstrategy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 import static com.sun.awt.AWTUtilities.setWindowOpaque;
@@ -37,6 +40,11 @@ class SelectMenu  {
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
+                try {
+                    frame.setIconImage(ImageIO.read(new File("D:\\unversity\\2\\AP\\Assingment\\final project\\GameStructure 2\\GameStructure\\src\\images\\zombieHead.png")));
+                } catch (IOException exc) {
+                    exc.printStackTrace();
+                }
             }
         });
     }

@@ -3,9 +3,12 @@
  ***/
 package game.bufferstrategy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +33,15 @@ class GameFrame extends JFrame {
     GameFrame(String title) {
         super(title);
         setResizable(false);
-		setUndecorated(true);
+        setUndecorated(true);
         setSize(GAME_WIDTH, GAME_HEIGHT);
+
+    }
+
         //
         // Initialize the JFrame ...
         //
-    }
+
 
     /**
      * This must be called once after the JFrame is shown:
@@ -111,14 +117,13 @@ class GameFrame extends JFrame {
         g2d.setFont(getFont().deriveFont(15.0f));
         g2d.drawString(String.valueOf(state.money), 23, 67);
 
-
-        g2d.setFont(getFont().deriveFont(70.0f));
-        g2d.setPaint(new Color(0, 51, 0));
+        g2d.setFont(new Font("A Afsaneh", Font.PLAIN, 100));
+        g2d.setPaint(new Color(51, 77, 0));
 
         if (state.gameOver) {
-            g2d.drawString("باختی", 330, 290);
+            g2d.drawString("باختی", 530, 290);
         } else if(!state.massage.isEmpty()){
-            g2d.drawString(state.massage, 330, 290);
+            g2d.drawString(state.massage, 530, 290);
         }
     }
 }
