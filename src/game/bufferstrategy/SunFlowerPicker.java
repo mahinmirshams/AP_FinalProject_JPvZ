@@ -4,7 +4,7 @@ package game.bufferstrategy;
 class SunFlowerPicker extends PlantsPicker {
 
     SunFlowerPicker(int x, int y, GameState state) {
-        super(x, y, "sunflowerpicker.png", "sunflower.gif", state);
+        super(x, y, "sunflowerpicker.png", "sunflowerPicker.png", state);
     }
 
     @Override

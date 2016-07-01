@@ -25,7 +25,7 @@ class SunFlower extends Plant {
             @Override
             public void run() {
                 Sun sun = new Sun(me, gameState);
-                gameState.drawables.add(sun);
+                gameState.addDrawables(sun);
             }
 
         };

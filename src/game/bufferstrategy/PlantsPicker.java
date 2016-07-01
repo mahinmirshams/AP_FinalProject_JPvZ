@@ -11,6 +11,7 @@ class PlantsPicker extends Drawable {
     PlantsPicker(int x, int y, String imageName, String cursorName, GameState state) {
         super(x, y, imageName, 50, 60, state);
         this.cursorName = cursorName;
+        Main.loadImage(cursorName);
     }
 
     int getValue() {
@@ -26,6 +27,4 @@ class PlantsPicker extends Drawable {
             gameState.selectedItemValue = getValue();
         }
     }
-
-
 }

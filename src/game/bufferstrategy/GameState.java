@@ -26,12 +26,14 @@ public class GameState {
     int states = 1;
     Cursor cursor = null;
     Plant selectedItem = null;
-    ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+    private  ArrayList<Drawable> drawables = new ArrayList<Drawable>();
     ArrayList<Selectable> selectables = new ArrayList<Selectable>();
     int selectedItemValue = 0;
     Boolean gameOver = false;
-    int level =1;
-
+    int level = 1;
+    String massage = "";
+    int killedZombie =0;
+    Level currentLevel;
 
 
     public GameState() {
@@ -46,7 +48,7 @@ public class GameState {
      * The method which updates the game state.
      */
     void update() {
-        Iterator<Drawable> drawableIterator = drawables.iterator();
+        Iterator<Drawable> drawableIterator = getDrawables().iterator();
         while (drawableIterator.hasNext()) {
             Drawable drawable = drawableIterator.next();
             if (drawable instanceof GameObject) {
@@ -54,7 +56,7 @@ public class GameState {
                 gameObject.update();
                 if (gameObject.isDeletable()) {
                     gameObject.deleteObject();
-                    drawableIterator.remove();
+                    deleteDrawable(drawable);
                 }
             }
         }
@@ -143,5 +145,28 @@ public class GameState {
         }
 
     }
+
+
+    synchronized ArrayList<Drawable> getDrawables(){
+        return new ArrayList<Drawable>(drawables) ;
+    }
+    void deleteDrawable(Drawable drawable){
+        drawables.remove(drawable);
+    }
+
+
+    void clearDrawables(){
+        for (Drawable drawable: drawables) {
+            if(drawable instanceof GameObject){
+                ((GameObject) drawable).deleteObject();
+            }
+        }
+        drawables.clear();
+    }
+
+    void addDrawables(Drawable drawable){
+        drawables.add(drawable);
+    }
+
 }
 

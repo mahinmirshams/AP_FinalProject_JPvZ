@@ -1,5 +1,6 @@
 package game.bufferstrategy;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -48,10 +49,10 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedZombie() {
-        Iterator<Drawable> iterator = gameState.drawables.iterator();
+        Iterator<Drawable> iterator = gameState.getDrawables().iterator();
         while (iterator.hasNext()) {
             Drawable drawable = iterator.next();
-            if (drawable instanceof GameObject) {
+            if (drawable instanceof Zombie) {
                 if (
                         (
                                 (x < drawable.x + drawable.width && x >= drawable.x) ||
@@ -59,7 +60,7 @@ abstract class GameObject extends Drawable {
                         ) &&
                         (
                                 (y > drawable.y && y <= drawable.y + drawable.height) ||
-                                (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
+                               (y + height >= drawable.y && (y + height <= drawable.height + drawable.y))
                         )
                 ) {
                     return (GameObject) drawable;
@@ -70,18 +71,18 @@ abstract class GameObject extends Drawable {
     }
 
     GameObject getCollidedPlant() {
-        Iterator<Selectable> iterator = gameState.selectables.iterator();
+        Iterator<Selectable> iterator = new ArrayList<Selectable>(gameState.selectables).iterator();
         while (iterator.hasNext()) {
             Selectable selectable = iterator.next();
 
             if (!selectable.isEmpty() &&
                     (
-                            (x < selectable.x + selectable.currentPlant.width && x >= selectable.currentPlant.x) ||
-                            (x + width >= selectable.currentPlant.x && x + width <= selectable.currentPlant.x + selectable.currentPlant.width)
+                            (x < selectable.x + selectable.currentPlant.width && x > selectable.currentPlant.x) ||
+                            (x + width > selectable.currentPlant.x && x + width < selectable.currentPlant.x + selectable.currentPlant.width)
                     ) &&
                     (
-                            (y > selectable.currentPlant.y && y <= selectable.currentPlant.y + selectable.currentPlant.height) ||
-                            (y + height >= selectable.currentPlant.y && (y + height <= selectable.currentPlant.height + selectable.currentPlant.y))
+                            (y > selectable.currentPlant.y && y < selectable.currentPlant.y + selectable.currentPlant.height) ||
+                            (y + height > selectable.currentPlant.y && (y + height < selectable.currentPlant.height + selectable.currentPlant.y))
                     )
             ) {
                 return selectable.currentPlant;

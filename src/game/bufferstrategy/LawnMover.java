@@ -8,7 +8,7 @@ import java.awt.*;
 class LawnMover extends GameObject {
 
     LawnMover(int x, int y, GameState state) {
-        super(x, y, "Lawn_Mower.png", 100, 85, state, 0, 700000000);
+        super(x, y, "Lawn_Mower.png", 100, 80, state, 0, 700000000);
     }
 
     @Override
@@ -17,17 +17,12 @@ class LawnMover extends GameObject {
     }
 
     @Override
-    void move() {
-        super.move();
-
-        for (Drawable z : gameState.drawables) {
-            if (x >= z.x && z instanceof Zombie) {
-                ((Zombie) z).hurt(Integer.MAX_VALUE);
-            }
-        }
-
-        if (x > 800) {
-            this.life = 0;
+    void update() {
+        super.update();
+        GameObject collidedZombie = getCollidedZombie();
+        if (collidedZombie != null && collidedZombie instanceof Zombie){
+            collidedZombie.hurt(Integer.MAX_VALUE);
+            this.changeSpeed(-2);
         }
     }
 }

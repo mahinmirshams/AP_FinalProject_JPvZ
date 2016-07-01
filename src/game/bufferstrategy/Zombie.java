@@ -42,14 +42,6 @@ abstract class Zombie extends GameObject {
                 // Walking
                 move();
 
-                if (x <= 300) {
-                    for (Drawable drawable : gameState.drawables) {
-                        if (drawable instanceof LawnMover && ((LawnMover) drawable).y <= 250) {
-                            ((LawnMover) drawable).changeSpeed(-2);
-                        }
-                    }
-                }
-
                 if (x <= 230) {
                     gameState.gameOver = true;
                 }
@@ -115,6 +107,8 @@ abstract class Zombie extends GameObject {
     void deleteObject() {
         if (chewTimerTask != null) chewTimerTask.cancel();
         if (unfreeze != null) unfreeze.cancel();
+        gameState.killedZombie++;
+        System.out.println(gameState.killedZombie);
         super.deleteObject();
     }
 }
