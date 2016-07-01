@@ -4,20 +4,33 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by saeedehspg on 6/23/2016 AD.
+ * A class mushroom  plant which shoots  any near zombie
  */
 class PeaShooter extends Plant {
     private Timer timer = new Timer();
-
+    /**
+     * a override method of Drawable class which set the state of a Drawable object
+     * @return
+     */
     @Override
     int getStateToVisible() {
         return 2;
     }
 
+    /**
+     * PeaShooter constructor
+     * @param x
+     * @param y
+     * @param state
+     */
+
     PeaShooter(int x, int y, GameState state) {
-        super(x, y, "Peashooter3.gif", 100, 100, state, 0, 100);
+        super(x, y, "Peashooter.gif", 60, 60, state, 0, 100);
 
     }
+    /**
+     * to delete the plant
+     */
 
     @Override
     void deleteObject() {
@@ -25,6 +38,9 @@ class PeaShooter extends Plant {
         timer.cancel();
     }
 
+    /**
+     * to plant it on the ground
+     */
     @Override
     void planted() {
         super.planted();

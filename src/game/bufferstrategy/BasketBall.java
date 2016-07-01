@@ -24,7 +24,7 @@ class BasketBall extends GameObject {
     }
 
     /**
-     * a overridden method of the
+     * a overridden method of the GameObject
      */
     @Override
     void move() {
@@ -35,6 +35,10 @@ class BasketBall extends GameObject {
             life = 0;
         }
     }
+
+    /**
+     *  overriden method of the GameObject class which detects the collision  of ball and plants
+     */
     @Override
     void update() {
         super.update();

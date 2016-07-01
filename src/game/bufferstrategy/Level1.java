@@ -1,14 +1,21 @@
 package game.bufferstrategy;
 
 /**
- * Created by saeedehspg on 6/29/16.
+ * specifing Properties of the level1
  */
 class Level1 extends Level {
-
+    /**
+     * level1 constructor
+     * @param state
+     */
     Level1(GameState state) {
+
         super(state);
     }
 
+    /**
+     *  running the level
+     */
     @Override
     void init() {
         int grassRows = 1;

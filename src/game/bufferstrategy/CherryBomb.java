@@ -4,21 +4,35 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by mahin mirshams on 6/26/2016.
+ * A class of cherry bomb plant which destroys any near zombie
  */
 class CherryBomb extends Plant {
 
     private int explosionradious = 100;
 
+    /**
+     * a override method of Drawable class which set the state of a Drawable object
+     * @return
+     */
     @Override
     int getStateToVisible() {
         return 2;
     }
 
+    /**
+     * cherryBomb constructor
+     * @param x
+     * @param y
+     * @param state
+     */
+
     CherryBomb(int x, int y, GameState state) {
-        super(x, y, "Cherry-Bomb_nonback.gif", 70, 70, state, 0, 100);
+        super(x, y, "cherry.gif", 100, 100, state, 0, 100);
     }
 
+    /**
+     * overridden method of gameObject which draws the plant in the specific place in ground
+     */
     @Override
     void planted() {
         super.planted();

@@ -1,6 +1,4 @@
-/***
- * In The Name of Allah
- ***/
+
 package game.bufferstrategy;
 
 import java.awt.event.MouseEvent;
@@ -8,30 +6,26 @@ import java.awt.event.MouseListener;
 import java.util.*;
 
 /**
- * A very simple structure for the main game loop.
- * THIS IS NOT PERFECT, but works for most situations.
- * Note that to make this work, none of the 2 methods
- * in the while loop (update() and render()) should be
- * long running! Both must execute very quickly, without
- * any waiting and blocking!
- * <p>
- * Detailed discussion on different game loop design
- * patterns is available in the following link:
- * http://gameprogrammingpatterns.com/game-loop.html
+ *  the gameloop of the game
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author Saeedeh SadeghPour
+ * @author Mahin Mirshams
  */
 class GameLoop implements Runnable {
 
     /**
      * Frame Per Second.
-     * Higher is better, but any value above 24 is fine.
      */
     private static final int FPS = 30;
 
 
     private GameFrame canvas;
     private GameState state;
+
+    /**
+     * GameLoop constructor
+     * @param frame
+     */
 
 
     GameLoop(GameFrame frame) {
@@ -44,7 +38,7 @@ class GameLoop implements Runnable {
      */
     void init() {
         // Perform all initializations ...
-        state.currentLevel = new Level5(state);
+        state.currentLevel = new Level1(state);
         state.currentLevel.init();
 
         canvas.addKeyListener(state.getKeyListener());
@@ -108,7 +102,12 @@ class GameLoop implements Runnable {
     }
 
 
-
+    /**
+     * find out the Item which is clicked on
+     * @param x
+     * @param y
+     * @return
+     */
     private Drawable getClickedItem(int x, int y) {
         for (int i = state.getDrawables().size() - 1; i >= 0; i--) {
             Drawable drawable = state.getDrawables().get(i);
@@ -123,9 +122,12 @@ class GameLoop implements Runnable {
     }
 
 
-
-
-
+    /**
+     * find out the Item which is clicked on and if its selectable (not occupied )
+     * @param x
+     * @param y
+     * @return
+     */
     private Selectable getClickedSelectable(int x, int y) {
         for (Selectable selectable : state.selectables) {
             if (
@@ -138,6 +140,10 @@ class GameLoop implements Runnable {
         return null;
     }
 
+    /**
+     * a method to make random suns fall from the sky
+     */
+
     private void makeSun() {
         if (state.states == 2) {
             Random rand = new Random();
@@ -146,6 +152,9 @@ class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * check the end of the game
+     */
     @Override
     public void run() {
         boolean gameOver = false;

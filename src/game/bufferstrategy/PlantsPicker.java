@@ -16,6 +16,7 @@ class PlantsPicker extends Drawable {
     }
 
     int getValue() {
+
         return 0;
     }
 

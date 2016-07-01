@@ -4,27 +4,43 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by mahin mirshams on 7/1/2016.
+ * A class mushroom  plant which shoots  any near zombie
  */
 public class Mushroom extends Plant {
     private Timer timer = new Timer();
 
+    /**
+     * a override method of Drawable class which set the state of a Drawable object
+     * @return
+     */
     @Override
     int getStateToVisible() {
         return 2;
     }
-
+    /**
+     * Mushroom constructor
+     * @param x
+     * @param y
+     * @param state
+     */
     Mushroom(int x, int y, GameState state) {
-        super(x, y, "mushroom.png", 70, 70, state, 0, 100);
+        super(x, y, "mushroom.png", 60, 60, state, 0, 100);
 
     }
 
+
+    /**
+     * to delete the plant
+     */
     @Override
     void deleteObject() {
         super.deleteObject();
         timer.cancel();
     }
 
+    /**
+     * to plant it on the ground
+     */
     @Override
     void planted() {
         super.planted();
