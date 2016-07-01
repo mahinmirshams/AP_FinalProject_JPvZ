@@ -1,6 +1,4 @@
-/***
- * In The Name of Allah
- ***/
+
 package game.bufferstrategy;
 
 import java.util.concurrent.ExecutorService;
@@ -9,7 +7,6 @@ import java.util.concurrent.Executors;
 /**
  * This class holds a global thread-pool for executing our threads.
  *
- * @author Seyed Mohammad Ghaffarian
  */
 class ThreadPool {
 
@@ -36,6 +33,7 @@ class ThreadPool {
      * {@link ExecutorService#shutdown()}
      */
     public static void shutdown() {
+
         executor.shutdown();
     }
 
@@ -43,6 +41,7 @@ class ThreadPool {
      * {@link ExecutorService#shutdownNow()}
      */
     public static void shutdownNow() {
+
         executor.shutdownNow();
     }
 }
