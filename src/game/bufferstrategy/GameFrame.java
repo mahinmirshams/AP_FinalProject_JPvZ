@@ -107,7 +107,7 @@ class GameFrame extends JFrame {
         }
 
         g2d.setFont(getFont().deriveFont(15.0f));
-        g2d.drawString(String.valueOf(state.money), 20, 117);
+        g2d.drawString(String.valueOf(state.money), 23, 67);
 
 
         g2d.setFont(getFont().deriveFont(70.0f));
