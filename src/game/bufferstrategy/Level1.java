@@ -21,5 +21,6 @@ class Level1 extends Level {
 
         state.addDrawables(new PeaShooterPicker(65, 57, state));
         state.addDrawables(new SunFlowerPicker(130, 57, state));
+        state.addDrawables(new MushroomPicker(195, 57, state));
     }
 }
