@@ -3,11 +3,10 @@
  ***/
 package game.bufferstrategy;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.*;
-import java.util.Timer;
-import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * The window on which the rendering is performed.
@@ -17,7 +16,8 @@ import javax.swing.*;
  * http://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
  * http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author Saeedeh SadeghPour
+ * @author Mahin Mirshams
  */
 class GameFrame extends JFrame {
 
