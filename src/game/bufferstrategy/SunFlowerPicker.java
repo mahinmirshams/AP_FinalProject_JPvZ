@@ -20,7 +20,7 @@ class SunFlowerPicker extends PlantsPicker {
      */
     @Override
     int getValue() {
-        return 0;
+        return 50;
     }
 
     /**

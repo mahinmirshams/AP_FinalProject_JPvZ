@@ -25,7 +25,7 @@ class PeaShooter extends Plant {
      */
 
     PeaShooter(int x, int y, GameState state) {
-        super(x, y, "Peashooter.gif", 60, 60, state, 0, 100);
+        super(x, y, "Peashooter.gif", 100, 100, state, 0, 100);
 
     }
     /**

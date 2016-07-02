@@ -23,6 +23,6 @@ class WalNut extends Plant {
      */
 
     WalNut(int x, int y, GameState state) {
-        super(x, y, "wallnut.gif", 60, 60, state, 0, 300);
+        super(x, y, "wallnut.gif", 100, 100, state, 0, 300);
     }
 }

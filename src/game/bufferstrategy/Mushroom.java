@@ -24,7 +24,7 @@ public class Mushroom extends Plant {
      * @param state
      */
     Mushroom(int x, int y, GameState state) {
-        super(x, y, "mushroom.png", 60, 60, state, 0, 100);
+        super(x, y, "mushroom.png", 100, 100, state, 0, 100);
 
     }
 

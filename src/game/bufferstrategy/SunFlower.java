@@ -26,7 +26,7 @@ class SunFlower extends Plant {
      */
 
     SunFlower(int x, int y, GameState state) {
-        super(x, y, "sunflower.gif", 60, 60, state, 0, 100);
+        super(x, y, "sunflower.gif", 100, 100, state, 0, 100);
     }
 
     /**
