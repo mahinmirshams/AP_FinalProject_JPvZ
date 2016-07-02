@@ -3,21 +3,15 @@
  ***/
 package game.bufferstrategy;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * The window on which the rendering is performed.
  * This structure uses the modern BufferStrategy approach for
  * double-buffering; actually, it performs triple-buffering!
- * For more information on BufferStrategy check out:
- * http://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
- * http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
  *
  * @author Saeedeh SadeghPour
  * @author Mahin Mirshams
@@ -30,6 +24,11 @@ class GameFrame extends JFrame {
 
     private BufferStrategy bufferStrategy;
 
+    /**
+     * GameFrame constructor
+     * @param title
+     */
+
     GameFrame(String title) {
         super(title);
         setResizable(false);
@@ -38,14 +37,8 @@ class GameFrame extends JFrame {
 
     }
 
-        //
-        // Initialize the JFrame ...
-        //
-
-
     /**
      * This must be called once after the JFrame is shown:
-     * frame.setVisible(true);
      * and before any rendering is started.
      */
     void initBufferStrategy() {
@@ -53,7 +46,6 @@ class GameFrame extends JFrame {
         createBufferStrategy(3);
         bufferStrategy = getBufferStrategy();
     }
-
 
     /**
      * Game rendering with triple-buffering using BufferStrategy.

@@ -1,14 +1,21 @@
 package game.bufferstrategy;
 
 /**
- * Created by saeedehspg on 6/29/16.
+ * specifing Properties of the level3
  */
 class Level3 extends Level {
 
+    /**
+     * level3 constructor
+     * @param state
+     */
     Level3(GameState state) {
         super(state);
     }
 
+    /**
+     *  running the level
+     */
     @Override
     void init() {
         int grassRows = 5;

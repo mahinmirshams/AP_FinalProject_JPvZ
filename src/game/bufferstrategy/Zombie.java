@@ -3,11 +3,14 @@ package game.bufferstrategy;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by saeedehspg on 6/21/2016 AD.
- */
 
+/**
+ * class of all kind of zombies
+ */
 abstract class Zombie extends GameObject {
+    /**
+     * zombie states
+     */
 
     enum ZombieState {
         Walking,
@@ -32,21 +35,40 @@ abstract class Zombie extends GameObject {
     int jumpStart;
     int jumpEnd;
 
+    /**
+     * setting the state
+     * @param state
+     */
     void setState(ZombieState state){
         this.state = state;
     }
 
+    /**
+     * a override method of Drawable class which set the state of a Drawable object
+     * @return
+     */
     @Override
     int getStateToVisible() {
         return 2;
     }
 
+    /**
+     * zombie constructor
+     * @param x
+     * @param y
+     * @param state
+     * @param normalZombieImg
+     * @param icedZombieImg
+     */
     Zombie(int x, int y, GameState state, String normalZombieImg, String icedZombieImg) {
         super(x, y, normalZombieImg, 70, 85, state, 2, 100);
         this.normalZombieImg = normalZombieImg;
         this.icedZombieImg = icedZombieImg;
     }
 
+    /**
+     * make the movments of a zombie
+     */
     @Override
     void update() {
         if (gameState.states == 2) {
@@ -105,12 +127,19 @@ abstract class Zombie extends GameObject {
         }
     }
 
+    /**
+     * manage how is the zombie`s strength
+     * @param strength
+     */
 
     @Override
     void hurt(int strength) {
         super.hurt(strength);
     }
 
+    /**
+     * zombie being back to normal
+     */
     private class Unfreeze extends TimerTask {
         @Override
         public void run() {
@@ -120,6 +149,9 @@ abstract class Zombie extends GameObject {
         }
     }
 
+    /**
+     * getting fronzen by being shooted by icedpeashooter
+     */
     void getIcy() {
         if (unfreeze != null) unfreeze.cancel();
         freezeTimer.purge();
@@ -134,6 +166,9 @@ abstract class Zombie extends GameObject {
         freezeTimer.schedule(unfreeze, 8000);
     }
 
+    /**
+     * delete the object
+     */
     @Override
     void deleteObject() {
         if (chewTimerTask != null) chewTimerTask.cancel();

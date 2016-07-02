@@ -15,7 +15,7 @@ import static com.sun.awt.AWTUtilities.setWindowOpaque;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
- * Created by mahin mirshams on 7/1/2016.
+ * main menu of the game
  */
 public class MainMenu {
 
@@ -24,10 +24,17 @@ public class MainMenu {
     GameState state;
     private JFrame frame ;
 
+    /**
+     * Main menu Constructor
+     * @param s
+     */
     MainMenu(String s){
 
      }
 
+    /**
+     *  Main menu Constructor
+     */
         MainMenu() {
             EventQueue.invokeLater(new Runnable() {
                 @Override
@@ -54,6 +61,9 @@ public class MainMenu {
             });
         }
 
+    /**
+     * making the frame trasnparent
+     */
         private class ContentPane extends JPanel {
 
             ContentPane() {
@@ -90,18 +100,20 @@ public class MainMenu {
 
                     background = (BufferedImage) Main.loadImage("MainMenu.png");
 
+                //initializing the buttons in the frame
                     exitImage = (BufferedImage) Main.loadImage("none.png");
                     continueImg = (BufferedImage) Main.loadImage("none.png");
                     startImg = (BufferedImage) Main.loadImage("none.png");
                     guideImg = (BufferedImage) Main.loadImage("none.png");
 
-
+//placing the buttons
                 exitButton = new Ellipse2D.Float(5, 480, 200,100);
                 startButton = new Ellipse2D.Float(575, 330, 200, 100);
                 continueButton = new Ellipse2D.Float(580, 180, 200, 100);
                 guideButton = new Ellipse2D.Float(775, 610, 200, 100);
 
 
+                // add mouse adapter for the buttons
 
                 MouseAdapter handler = new MouseAdapter() {
 
@@ -196,11 +208,19 @@ public class MainMenu {
                 addMouseMotionListener(handler);
             }
 
+            /**
+             * get the exact size of the background
+             * @return
+             */
             @Override
             public Dimension getPreferredSize() {
                 return background == null ? new Dimension(400, 400) : new Dimension(background.getWidth(), background.getHeight());
             }
 
+            /**
+             * draw the background image and buttons
+             * @param g
+             */
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);

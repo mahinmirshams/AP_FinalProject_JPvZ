@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by mahin mirshams on 6/28/2016.
+ * a kind of a zombie that throw basketballs to the plants and after finishing his balls , he starts to move forward
  */
 class CatapultBasketBallZombie extends Zombie {
 
@@ -13,16 +13,29 @@ class CatapultBasketBallZombie extends Zombie {
     private int basketball;
     Timer timer = new Timer();
 
-
+    /**
+     * CatapultBasketBallZombie constructor
+     * @param x
+     * @param y
+     * @param gameState
+     */
     CatapultBasketBallZombie(int x, int y, GameState gameState) {
         super(x, y, gameState, "Catapult-Zombie.gif", "Catapult-Zombie.gif");
     }
 
+    /**
+     * overriden method of Zombie class to set the state
+     * @param state
+     */
     @Override
     void setState(ZombieState state) {
         this.state = state;
         super.setState(state);
     }
+
+    /**
+     * overriden method of Zombie class to delete zombie
+     */
 
     @Override
     void deleteObject() {
@@ -30,6 +43,9 @@ class CatapultBasketBallZombie extends Zombie {
         super.deleteObject();
     }
 
+    /**
+     * overriden method of Zombie class to move the zombie and toss the balls
+     */
     @Override
     void update() {
         super.update();

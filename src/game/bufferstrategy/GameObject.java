@@ -1,15 +1,24 @@
 package game.bufferstrategy;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 /**
- * Created by saeedehspg on 6/25/2016 AD.
+ * Almost every Object in the game
  */
 abstract class GameObject extends Drawable {
 
     int speed;
     int life;
+
+    /**
+     * GameObject constructor
+     * @param x
+     * @param y
+     * @param file
+     * @param width
+     * @param height
+     * @param gameState
+     * @param speed
+     * @param life
+     */
 
     GameObject(int x, int y, String file, int width, int height, GameState gameState, int speed, int life) {
         super(x, y, file, width, height, gameState);
@@ -17,13 +26,26 @@ abstract class GameObject extends Drawable {
         this.life = life;
     }
 
+    /**
+     * the speed of every object
+     */
     void move() {
         x -= speed;
     }
 
+    /**
+     * the change in speed of every object
+     * @param speed
+     */
     void changeSpeed(int speed) {
+
         this.speed = speed;
     }
+
+    /**
+     * when being shooted by a bullet (pea or icedpea)
+     * @param strength
+     */
 
     void hurt(int strength) {
         life -= strength;
@@ -31,19 +53,32 @@ abstract class GameObject extends Drawable {
             life = 0;
     }
 
+    /**
+     * when being destroyed by Cherrybomb
+     * @return
+     */
     boolean isDeletable() {
         return life == 0;
     }
 
+    /**
+     * delete the object
+     */
     void deleteObject() {
 
     }
 
+    /**
+     * update the movement of a object
+     */
     void update() {
         if (gameState.states > 1)
             move();
     }
 
+    /**
+     * plant a object (plants)
+     */
     void planted() {
 
     }
@@ -67,6 +102,10 @@ abstract class GameObject extends Drawable {
         return null;
     }
 
+    /**
+     * come across a plant
+     * @return
+     */
     GameObject getCollidedPlant() {
         for (Selectable selectable : gameState.selectables) {
             if (

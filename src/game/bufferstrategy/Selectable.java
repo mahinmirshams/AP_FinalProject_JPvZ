@@ -3,7 +3,7 @@ package game.bufferstrategy;
 import java.awt.*;
 
 /**
- * Created by saeedehspg on 6/22/2016 AD.
+ * a class which shows that what part of the ground is occupied by zombies or plants
  */
 class Selectable {
     int x;
@@ -14,16 +14,30 @@ class Selectable {
     Plant currentPlant = null;
     GameState gameState;
 
+    /**
+     * Selectable constructor
+     * @param x
+     * @param y
+     * @param gameState
+     */
     Selectable(int x, int y, GameState gameState) {
         this.gameState = gameState;
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * check whether is empty or not
+     * @return
+     */
     boolean isEmpty() {
         return currentPlant == null;
     }
 
+    /**
+     * plant on the ground
+     * @return
+     */
     boolean plant() {
         if (!plantable || !isEmpty())
             return false;
@@ -40,6 +54,12 @@ class Selectable {
         return false;
     }
 
+    /**
+     * draw the object graphically
+     * @param g2d
+     * @param state
+     * @throws InterruptedException
+     */
     void draw(Graphics2D g2d, GameState state) throws InterruptedException {
         if (!isEmpty()) {
             if (currentPlant.getStateToVisible() <= state.states)
@@ -57,6 +77,10 @@ class Selectable {
             g2d.setPaint(previousPaint);
         }
     }
+
+    /**
+     * undo the planting work
+     */
 
     void dig() {
         if (!isEmpty()) {

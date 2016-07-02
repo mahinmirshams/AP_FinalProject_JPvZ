@@ -3,21 +3,19 @@
  ***/
 package game.bufferstrategy;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.util.Timer;
-import java.util.TimerTask;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  * Program start.
  *
- * @author Seyed Mohammad Ghaffarian
+ * * @author Saeedeh SadeghPour
+ * @author Mahin Mirshams
  */
 public class Main {
 
@@ -35,6 +33,11 @@ public class Main {
         MainMenu mainMenu = new MainMenu();
     }
 
+    /**
+     * loading gif images
+     * @param filename
+     * @return
+     */
     static Image loadImage(String filename) {
         if (cachedImages.containsKey(filename)) return cachedImages.get(filename);
 

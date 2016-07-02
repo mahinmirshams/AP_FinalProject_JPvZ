@@ -1,6 +1,4 @@
-/***
- * In The Name of Allah
- ***/
+
 package game.bufferstrategy;
 
 import java.awt.event.KeyEvent;
@@ -15,7 +13,8 @@ import java.awt.Cursor;
  * This class holds the state of the game and all of its elements.
  * This class also handles user inputs, which affect the game state.
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author Saeedeh SadeghPour
+ * @author Mahin Mirshams
  */
 public class GameState {
 
@@ -46,6 +45,9 @@ public class GameState {
     boolean digISOn = false;
 
 
+    /**
+     * Gamestate Constructor
+     */
     public GameState() {
         //
         // Initialize the game state and all elements ...
@@ -281,15 +283,25 @@ public class GameState {
 
     }
 
-
+    /**
+     * getter
+     * @return
+     */
     synchronized ArrayList<Drawable> getDrawables(){
         return new ArrayList<Drawable>(drawables) ;
     }
+
+    /**
+     * delete the array
+     * @param drawable
+     */
     void deleteDrawable(Drawable drawable){
         drawables.remove(drawable);
     }
 
-
+    /**
+     * make the array clear
+     */
     void clearDrawables(){
         for (Drawable drawable: drawables) {
             if(drawable instanceof GameObject){
@@ -299,6 +311,10 @@ public class GameState {
         drawables.clear();
     }
 
+    /**
+     * add objects to the array
+     * @param drawable
+     */
     void addDrawables(Drawable drawable){
         drawables.add(drawable);
     }

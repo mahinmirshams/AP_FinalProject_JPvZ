@@ -3,7 +3,7 @@ package game.bufferstrategy;
 import java.util.*;
 
 /**
- * Created by saeedehspg on 6/29/16.
+ * a method which makes everything a level needs in a game
  */
 class Level {
     private int[] zombieEntrance = {
@@ -14,10 +14,17 @@ class Level {
     private Timer zombiesTimer = new Timer();
     GameState state;
 
+    /**
+     * level constructor
+     * @param state
+     */
     Level(GameState state) {
         this.state = state;
     }
 
+    /**
+     * running the level
+     */
     void init() {
         for (final Integer delay: generateZombies.keySet()) {
             TimerTask spawnTimerTask = new TimerTask() {
@@ -32,6 +39,9 @@ class Level {
         }
     }
 
+    /**
+     * when a level is finished , it should be go to the next level and start again
+     */
     private void levelCompleted() {
         finishLevel();
         state.killedZombie = 0;
@@ -74,6 +84,10 @@ class Level {
         state.currentLevel.init();
     }
 
+    /**
+     * rolls the grasses convenient  for each level
+     * @param grassRows
+     */
     void drawGrasses(int grassRows) {
         Timer drawGrassTimer = new Timer();
 
@@ -143,12 +157,18 @@ class Level {
         }
     }
 
+    /**
+     * check whether a level is compeleted or not
+     */
     void update() {
         if (state.killedZombie >= generateZombies.size()) {
             levelCompleted();
         }
     }
 
+    /**
+     * finishes a level
+     */
     private void finishLevel(){
         for (TimerTask timerTask : zombiesTimerTasks) {
             timerTask.cancel();
@@ -164,6 +184,14 @@ class Level {
         CatapultBasketBall
     }
 
+    /**
+     * make random zombies to attack the house
+     * @param zombieType
+     * @param count
+     * @param grassRows
+     * @param Delays
+     * @return
+     */
     int makeRandomZombiesOfType(ZombieType zombieType, int count, int grassRows, int Delays) {
         final Random rand = new Random();
 
@@ -200,6 +228,12 @@ class Level {
 
         return Delays;
     }
+
+    /**
+     * set a default picker for the keyboard
+     * @param plantsPicker
+     * @return
+     */
 
     PlantsPicker setDefaultPicker(PlantsPicker plantsPicker) {
         state.pointedPicker = plantsPicker;

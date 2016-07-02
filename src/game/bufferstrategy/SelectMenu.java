@@ -9,17 +9,20 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import static com.sun.awt.AWTUtilities.setWindowOpaque;
 
 /**
- * Created by mahin mirshams on 7/1/2016.
+ * selecting menu in the middle of the game
  */
 class SelectMenu  {
     MainMenu test  ;
     GameState state;
     private JFrame frame ;
+
+    /**
+     * select menu constructor
+     */
 
     SelectMenu() {
         EventQueue.invokeLater(new Runnable() {
@@ -49,6 +52,9 @@ class SelectMenu  {
         });
     }
 
+    /**
+     * making a transparent frame
+     */
     private class ContentPane extends JPanel {
 
         ContentPane() {
@@ -79,11 +85,15 @@ class SelectMenu  {
 
         ImagePane() {
             setOpaque(false);
+            //initializing images for buttons
+
 
                 background = (BufferedImage) Main.loadImage("SelectMenu.png");
                 exitImage = (BufferedImage) Main.loadImage("exitButton.png");
                 return2MenuImg = (BufferedImage) Main.loadImage("returnToMainMenuButton.png");
                 continueImg = (BufferedImage) Main.loadImage("button2.png");
+
+            //initializing  buttons and placing them
 
             exitButton = new Ellipse2D.Float(110, 410, 200, 44);
             continueButton = new Ellipse2D.Float(110, 315, 200, 44);
@@ -158,11 +168,19 @@ class SelectMenu  {
             addMouseMotionListener(handler);
         }
 
+        /**
+         * get the exact size of the background
+         * @return
+         */
         @Override
         public Dimension getPreferredSize() {
             return background == null ? new Dimension(400, 400) : new Dimension(background.getWidth(), background.getHeight());
         }
 
+        /**
+         * paint the frame and buttons
+         * @param g
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);

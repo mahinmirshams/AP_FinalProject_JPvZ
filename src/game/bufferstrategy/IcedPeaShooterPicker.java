@@ -1,19 +1,33 @@
 package game.bufferstrategy;
 
 /**
- * Created by saeedehspg on 6/23/2016 AD.
+ *  A class for the picker menus which are places in the top left of the GameFrame
  */
 class IcedPeaShooterPicker extends PlantsPicker {
 
+    /**
+     * IcedPeaShooterPicker
+     * @param x
+     * @param y
+     * @param state
+     */
     IcedPeaShooterPicker(int x, int y, GameState state) {
-        super(x, y, "Icedpeashooter2.png", "Snow_Pea_(HD_size).png", state);
+        super(x, y, "Icedpeashooter2.png", "SnowPea.gif", state);
     }
 
+    /**
+     * overridden method of plantPicker class to set the sun which a plant should collect before being unlocked
+     * @return
+     */
     @Override
     int getValue() {
         return 0;
     }
 
+    /**
+     * overridden method of plantPicker class to do works after being clicked
+     * initializing a Ice pea shooter
+     */
     @Override
     void onClick() {
         super.onClick();

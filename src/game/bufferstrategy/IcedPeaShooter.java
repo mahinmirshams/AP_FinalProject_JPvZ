@@ -4,26 +4,43 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by saeedehspg on 6/23/2016 AD.
+ * A class IcedPeaShooter plant which shoots  any near zombie and ice them (make them walk slowly )
  */
 class IcedPeaShooter extends Plant {
     private Timer timer = new Timer();
 
+    /**
+     * a override method of Drawable class which set the state of a Drawable object
+     * @return
+     */
     @Override
     int getStateToVisible() {
         return 2;
     }
 
+    /**
+     * IcedPeaShooter constructor
+     * @param x
+     * @param y
+     * @param state
+     */
+
     IcedPeaShooter(int x, int y, GameState state) {
-        super(x, y, "Snow-Pea2.gif", 100, 100, state, 0, 100);
+        super(x, y, "Snow-Pea2.gif", 60, 60, state, 0, 100);
     }
 
+    /**
+     * to delete the plant
+     */
     @Override
     void deleteObject() {
         super.deleteObject();
         timer.cancel();
     }
 
+    /**
+     * to plant it on the ground
+     */
     @Override
     void planted() {
         super.planted();
