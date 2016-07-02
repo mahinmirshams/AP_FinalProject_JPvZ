@@ -11,7 +11,7 @@ class IcedPeaShooterPicker extends PlantsPicker {
 
     @Override
     int getValue() {
-        return 175;
+        return 0;
     }
 
     @Override

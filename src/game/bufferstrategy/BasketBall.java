@@ -41,7 +41,8 @@ class BasketBall extends GameObject {
 
         GameObject collidedPlant = getCollidedPlant();
         if (collidedPlant != null) {
-            collidedPlant.hurt(15);
+            collidedPlant.hurt(Integer.MAX_VALUE);
+            System.out.println(Integer.MAX_VALUE);
             life = 0;
         }
     }
