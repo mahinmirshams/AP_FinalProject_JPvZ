@@ -38,7 +38,7 @@ class GameLoop implements Runnable {
      */
     void init() {
         // Perform all initializations ...
-        state.currentLevel = new Level5(state);
+        state.currentLevel = new Level1(state);
         state.currentLevel.init();
 
         canvas.addKeyListener(state.getKeyListener());
